@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
-import { PortfolioGrid } from "@/components/work/PortfolioGrid";
-import { featuredVideos, moreWorkVideos } from "@/lib/data/portfolio";
+import { PieceGrid } from "@/components/work/PieceGrid";
+import { featuredPieces, morePieces } from "@/lib/data/portfolioPieces";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Portfolio of editing work — before/after reels, 3D motion, gaming, branded content, podcast, and short-form.",
+  description: "Portfolio of editing work — gaming, 3D motion, branded content, podcast, and short-form.",
 };
 
 export default function WorkPage() {
@@ -21,13 +21,13 @@ export default function WorkPage() {
             Work.
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-lg">
-            Six pieces. Each one built to make you stop scrolling.
+            Click any piece to see what went into it.
           </p>
         </AnimatedSection>
 
-        {/* Featured 6 */}
+        {/* Featured */}
         <AnimatedSection delay={0.1}>
-          <PortfolioGrid videos={featuredVideos} showFilter={false} />
+          <PieceGrid pieces={featuredPieces} showFilter={false} />
         </AnimatedSection>
 
         {/* Divider */}
@@ -35,11 +35,7 @@ export default function WorkPage() {
 
         {/* More Work */}
         <AnimatedSection>
-          <PortfolioGrid
-            videos={moreWorkVideos}
-            title="More Work"
-            showFilter={true}
-          />
+          <PieceGrid pieces={morePieces} title="More Work" showFilter={true} />
         </AnimatedSection>
       </div>
     </div>
