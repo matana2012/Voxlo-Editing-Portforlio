@@ -82,8 +82,7 @@ const socials = [
       "i turn your clips into content that actually gets views",
       'dm me "edit" for a free sample',
     ],
-    // Save your monkey-at-cafe photo to public/avatar-twitter.jpg
-    avatarSrc: "/avatar-twitter.jpg",
+    avatarSrc: "/avatar-social.jpg",
     Logo: XLogo,
     logoBg: "bg-black",
     logoColor: "text-white",
@@ -108,7 +107,7 @@ export default function SocialPage() {
             Find me.
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-md">
-            Gaming edits, behind-the-scenes, and the occasional iced coffee.
+            Daily content, editing lessons, and behind the scenes.
           </p>
         </AnimatedSection>
 
