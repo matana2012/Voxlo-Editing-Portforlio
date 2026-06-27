@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
 import { ArrowUpRight } from "lucide-react";
+import { SocialAvatar } from "@/components/social/SocialAvatar";
 
 export const metadata: Metadata = {
   title: "Social | Voxlo Editing",
@@ -141,15 +142,11 @@ export default function SocialPage() {
                 {/* Avatar + bio body */}
                 <div className="p-5 flex flex-col gap-4 flex-1">
                   {/* Avatar */}
-                  <div className="w-14 h-14 rounded-full bg-white/10 border border-border overflow-hidden flex-shrink-0">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
+                  <div className="w-14 h-14 rounded-full bg-white/10 border border-border overflow-hidden flex-shrink-0 flex items-center justify-center">
+                    <SocialAvatar
                       src={s.avatarSrc}
                       alt={`${s.platform} profile photo`}
-                      className="w-full h-full object-cover"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).style.display = "none";
-                      }}
+                      initials="VE"
                     />
                   </div>
 
