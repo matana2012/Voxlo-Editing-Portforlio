@@ -32,8 +32,8 @@ export const featuredPieces: PortfolioPiece[] = [
   {
     id: "forza-gold-wristband",
     title: "I Don't Play Racing Games. So I Got the GOLD Wristband in Forza Horizon 6",
-    client: "@Alex_Fishy",
-    clientUrl: "https://www.youtube.com/@Alex_Fishy",
+    client: "@klentbolt",
+    clientUrl: "https://www.youtube.com/@klentbolt",
     runtime: "28:43",
     tags: ["gaming", "long-form"],
     whatWasDone: [
