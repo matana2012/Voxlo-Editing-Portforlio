@@ -2,16 +2,16 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 const socialLinks = [
-  { label: "TikTok", href: "https://tiktok.com/@voxloediting" },
-  { label: "YouTube", href: "https://youtube.com/@voxloediting" },
-  { label: "Instagram", href: "https://instagram.com/voxloediting" },
-  { label: "X", href: "https://x.com/voxloediting" },
+  { label: "Instagram", href: "https://www.instagram.com/_voxlo_/" },
+  { label: "TikTok", href: "https://www.tiktok.com/@_voxlo_" },
+  { label: "X", href: "https://x.com/clypz__" },
 ];
 
 const footerLinks = [
   { label: "Work", href: "/work" },
-  { label: "Services", href: "/services" },
+  { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
+  { label: "Social", href: "/social" },
   { label: "Contact", href: "/contact" },
 ];
 
