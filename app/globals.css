@@ -25,10 +25,13 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* Base background lives on <html> so fixed -z-10 backdrops can sit behind
+       the body content without being covered by an opaque body background. */
+    background-color: var(--background);
   }
 
   body {
-    background-color: var(--background);
+    background-color: transparent;
     color: var(--foreground);
     font-family: "Satoshi", system-ui, sans-serif;
   }
