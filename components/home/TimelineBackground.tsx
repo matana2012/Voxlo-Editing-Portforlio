@@ -1,13 +1,13 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from "framer-motion";
 
 /**
  * Scroll-driven "editing timeline" background.
- * Rows of colored clips (like a video editor's timeline), tilted into
- * perspective, that wheel downward as the page scrolls and settle at the end.
- * Rendered behind all content at low opacity so foreground text stays readable.
+ * Two vertical timeline panels frame the page on the left and right. As you
+ * scroll they descend and rotate further into perspective — like two walls of
+ * a corridor you're travelling down into. The center stays clear for content.
+ * Rendered behind everything; respects prefers-reduced-motion.
  */
 
 // Palette pulled from the showreel timeline — vivid clip colors.
@@ -29,68 +29,69 @@ function rand(seed: number) {
   return x - Math.floor(x);
 }
 
-const LANES = 14;
-const CLIPS_PER_LANE = 18;
+const ROWS = 34;
+const CLIPS_PER_ROW = 7;
 
-// Precompute lanes deterministically at module load.
-const lanes = Array.from({ length: LANES }, (_, l) => {
-  const offset = rand(l * 3.3) * 160; // horizontal stagger per lane
-  const clips = Array.from({ length: CLIPS_PER_LANE }, (_, c) => {
-    const s = l * 100 + c;
-    return {
-      w: 36 + Math.round(rand(s) * 150), // clip width px
-      color: COLORS[Math.floor(rand(s + 7) * COLORS.length)],
-      lit: rand(s + 19) > 0.82, // a few "highlighted" white-ish clips
-    };
+function buildColumn(salt: number) {
+  return Array.from({ length: ROWS }, (_, r) => {
+    const offset = rand(salt * 50 + r) * 60;
+    const clips = Array.from({ length: CLIPS_PER_ROW }, (_, c) => {
+      const s = salt * 1000 + r * 13 + c;
+      return {
+        w: 30 + Math.round(rand(s) * 96),
+        color: COLORS[Math.floor(rand(s + 7) * COLORS.length)],
+        lit: rand(s + 19) > 0.86,
+      };
+    });
+    return { offset, clips };
   });
-  return { offset, clips };
-});
+}
 
-export function TimelineBackground() {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
+const leftColumn = buildColumn(1);
+const rightColumn = buildColumn(2);
 
-  // Progress of the whole page scroll (0 at top, 1 at bottom).
-  const { scrollYProgress } = useScroll();
+interface ColumnProps {
+  side: "left" | "right";
+  lanes: ReturnType<typeof buildColumn>;
+  y: MotionValue<string> | string;
+  rotate: MotionValue<number> | number;
+}
 
-  // Wheel the timeline plane downward and roll it slightly as you scroll.
-  const y = useTransform(scrollYProgress, [0, 1], ["-8%", "-46%"]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [-2, 5]);
-  const opacity = useTransform(scrollYProgress, [0, 0.05, 0.9, 1], [0.08, 0.24, 0.24, 0.14]);
-
+function Column({ side, lanes, y, rotate }: ColumnProps) {
+  const isLeft = side === "left";
   return (
     <div
-      ref={ref}
-      aria-hidden="true"
-      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
-      style={{ perspective: "1000px" }}
+      className={`absolute top-0 h-full ${
+        isLeft ? "left-0" : "right-0"
+      } hidden w-[34%] overflow-hidden sm:block md:w-[30%]`}
+      style={{ perspective: "1300px" }}
     >
-      {/* Tilted, scroll-driven timeline plane */}
       <motion.div
-        style={
-          reduceMotion
-            ? { opacity: 0.14, transform: "rotateX(58deg) rotateZ(-3deg)" }
-            : { y, rotate, opacity, transformPerspective: 1000 }
-        }
-        className="absolute left-1/2 top-1/2 flex w-[180%] -translate-x-1/2 -translate-y-1/2 flex-col gap-3 will-change-transform [transform:rotateX(58deg)]"
+        style={{
+          y,
+          rotateY: rotate,
+          transformOrigin: isLeft ? "left center" : "right center",
+          transformStyle: "preserve-3d",
+        }}
+        className={`absolute top-1/2 flex h-[150%] w-[170%] -translate-y-1/2 flex-col justify-center gap-[10px] opacity-60 will-change-transform ${
+          isLeft ? "left-0 items-start" : "right-0 items-end"
+        }`}
       >
         {lanes.map((lane, i) => (
           <div
             key={i}
-            className="flex gap-2"
-            style={{ transform: `translateX(-${lane.offset}px)` }}
+            className={`flex gap-[7px] ${isLeft ? "flex-row" : "flex-row-reverse"}`}
+            style={{ transform: `translateX(${isLeft ? "-" : ""}${lane.offset}px)` }}
           >
             {lane.clips.map((clip, j) => (
               <div
                 key={j}
-                className="h-6 rounded-[3px] md:h-7"
+                className="h-5 rounded-[3px] md:h-6"
                 style={{
                   width: clip.w,
                   backgroundColor: clip.color,
-                  boxShadow: clip.lit
-                    ? `0 0 12px 1px ${clip.color}`
-                    : undefined,
-                  opacity: clip.lit ? 1 : 0.9,
+                  boxShadow: clip.lit ? `0 0 12px 1px ${clip.color}` : undefined,
+                  opacity: clip.lit ? 1 : 0.92,
                 }}
               />
             ))}
@@ -98,9 +99,45 @@ export function TimelineBackground() {
         ))}
       </motion.div>
 
-      {/* Readability scrims: darken center + fade edges so text stays legible. */}
-      <div className="absolute inset-0 bg-background/62" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,hsl(var(--background))_72%)]" />
+      {/* Fade the inner edge toward the center so text never fights the clips. */}
+      <div
+        className={`absolute inset-0 ${
+          isLeft
+            ? "bg-gradient-to-r from-transparent via-background/55 to-background"
+            : "bg-gradient-to-l from-transparent via-background/55 to-background"
+        }`}
+      />
+    </div>
+  );
+}
+
+export function TimelineBackground() {
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll();
+
+  // Descend (translate down) and rotate further into perspective while scrolling.
+  const y = useTransform(scrollYProgress, [0, 1], ["-4%", "-26%"]);
+  const rotL = useTransform(scrollYProgress, [0, 1], [26, 46]);
+  const rotR = useTransform(scrollYProgress, [0, 1], [-26, -46]);
+
+  return (
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <Column
+        side="left"
+        lanes={leftColumn}
+        y={reduceMotion ? "-12%" : y}
+        rotate={reduceMotion ? 34 : rotL}
+      />
+      <Column
+        side="right"
+        lanes={rightColumn}
+        y={reduceMotion ? "-12%" : y}
+        rotate={reduceMotion ? -34 : rotR}
+      />
+
+      {/* Gentle top/bottom fade so the columns dissolve into the page edges. */}
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </div>
   );
 }
