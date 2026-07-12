@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { PieceGrid } from "@/components/work/PieceGrid";
+import { ChannelsGrid } from "@/components/work/ChannelsGrid";
 import { featuredPieces, morePieces } from "@/lib/data/portfolioPieces";
 
 export const metadata: Metadata = {
@@ -23,6 +24,11 @@ export default function WorkPage() {
           <p className="mt-6 text-lg text-muted-foreground max-w-lg">
             Click any piece to see what went into it.
           </p>
+        </AnimatedSection>
+
+        {/* Channels */}
+        <AnimatedSection delay={0.1}>
+          <ChannelsGrid />
         </AnimatedSection>
 
         {/* Featured */}
