@@ -22,13 +22,13 @@ const channels: Channel[] = [
     name: "Klentbolt",
     description: "Gaming channel prioritizing vlogs and gaming with friends.",
     url: "https://www.youtube.com/@klentbolt",
-    pfp: "/klentbolt_pfp.png",
+    pfp: "/klentbolt_pfp.jpg",
   },
   {
     name: "Alex Fishy",
     description: "Gaming channel focused mainly on gameplay and fun gaming footage.",
     url: "https://www.youtube.com/@Alex_Fishy",
-    pfp: "/alex_fishy_pfp.png",
+    pfp: "/alex_fishy_pfp.jpg",
   },
 ];
 
