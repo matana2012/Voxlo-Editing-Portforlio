@@ -31,13 +31,13 @@ export function Hero() {
             "radial-gradient(55% 50% at 50% 38%, rgba(245,166,35,0.12), transparent 72%)",
         }}
       />
-      {/* Legibility scrim behind the headline */}
+      {/* Legibility scrim behind the headline — lighter so the 3D reads through */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(46% 42% at 50% 47%, rgba(11,10,9,0.70), transparent 78%)",
+            "radial-gradient(40% 32% at 50% 50%, rgba(11,10,9,0.40), transparent 80%)",
         }}
       />
 
@@ -60,6 +60,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
+          style={{ textShadow: "0 4px 45px rgba(11,10,9,0.6)" }}
           className="font-display font-semibold leading-[0.9] tracking-[-0.02em] text-foreground text-[clamp(3.5rem,11vw,9.5rem)]"
         >
           Voxlo

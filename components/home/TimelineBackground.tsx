@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 
 /**
  * Scroll-driven "editing timeline" background.
@@ -114,28 +114,18 @@ function Column({ side, tracks, y, rotate }: ColumnProps) {
 }
 
 export function TimelineBackground() {
-  const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
 
   // Travel downward and rotate further into perspective while scrolling.
+  // Always scroll-linked — this motion is the signature of the page.
   const y = useTransform(scrollYProgress, [0, 1], ["-22%", "22%"]);
   const rotL = useTransform(scrollYProgress, [0, 1], [24, 52]);
   const rotR = useTransform(scrollYProgress, [0, 1], [-24, -52]);
 
   return (
     <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      <Column
-        side="left"
-        tracks={leftColumn}
-        y={reduceMotion ? "0%" : y}
-        rotate={reduceMotion ? 34 : rotL}
-      />
-      <Column
-        side="right"
-        tracks={rightColumn}
-        y={reduceMotion ? "0%" : y}
-        rotate={reduceMotion ? -34 : rotR}
-      />
+      <Column side="left" tracks={leftColumn} y={y} rotate={rotL} />
+      <Column side="right" tracks={rightColumn} y={y} rotate={rotR} />
 
       {/* Gentle top/bottom fade so the columns dissolve into the page edges. */}
       <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
