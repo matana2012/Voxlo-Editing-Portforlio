@@ -71,6 +71,23 @@ export default function PricingPage() {
           </p>
         </AnimatedSection>
 
+        {/* Anchor */}
+        <AnimatedSection delay={0.05} className="mb-14">
+          <div className="rounded-2xl border border-accent/25 bg-accent-soft p-8 md:p-10">
+            <p className="mb-3 text-xs font-medium uppercase tracking-[0.3em] text-accent">
+              The short version
+            </p>
+            <p className="font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+              Starting at <span className="text-ember">$80</span>
+              <span className="text-2xl text-muted-foreground md:text-3xl">/video</span>
+            </p>
+            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-muted-foreground">
+              Flexes based on video length, complexity, and your situation. No rigid packages —
+              we scope it to what you actually need.
+            </p>
+          </div>
+        </AnimatedSection>
+
         {/* Tier grid */}
         <AnimatedSection delay={0.1}>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
@@ -115,7 +132,8 @@ export default function PricingPage() {
               ))}
             </ul>
 
-            <p className="text-sm text-muted-foreground/40 mb-8">
+            <p className="mb-8 rounded-xl border border-border bg-muted/40 px-5 py-4 text-[15px] font-medium leading-relaxed text-foreground/80">
+              Pricing can change depending on your channel, what you need, and how you record.
               Final pricing depends on footage volume, revision rounds, and turnaround needs.
             </p>
 

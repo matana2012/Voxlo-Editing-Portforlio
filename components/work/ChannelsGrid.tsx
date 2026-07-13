@@ -34,7 +34,7 @@ const channels: Channel[] = [
     name: "MarqNova",
     description: "Minecraft toy channel posting high-retention videos with strong storytelling.",
     url: "https://www.youtube.com/@marqnova",
-    pfp: "/marq_nova_pfp.png",
+    pfp: "/marq_nova_pfp.jpg",
   },
 ];
 

@@ -7,21 +7,21 @@ import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
 import * as THREE from "three";
 
 /**
- * Interactive cinematic 3D hero — a cluster of "monitor" panels drifting in a
- * warm room. Each screen shows a real frame from Voxlo's videos with a subtle
- * orange tint; most panels face the viewer. Gentle sway + pointer parallax
- * keep the screens readable. Hand-built in Three.js, mounted client-only.
+ * Interactive cinematic 3D hero — a cluster of "monitor" panels drifting slowly
+ * in a warm room. Screens show real gaming / motion-graphics stills from Voxlo's
+ * work with a subtle orange tint; most panels face the viewer. Gentle sway +
+ * pointer parallax keep the screens readable. Hand-built in Three.js.
  */
 
-const SCREENS = [
-  "/screens/yM1Z9sQPkbs.jpg",
-  "/screens/vWj_U8HI53c.jpg",
-  "/screens/jg2ni-c-bmc.jpg",
-  "/screens/FukLaMhIYCw.jpg",
-  "/screens/CMsSkVDEuB0.jpg",
-  "/screens/bAd-krnnVqQ.jpg",
-  "/screens/EMOjNTRZ3q8.jpg",
+// One branded "get a quote" card (shown exactly once), plus gaming / motion stills.
+const SPECIAL = "/screens/yM1Z9sQPkbs.jpg";
+const STILLS = [
+  "/screens/bAd-krnnVqQ.jpg", // Forza
+  "/screens/EMOjNTRZ3q8.jpg", // Backrooms
+  "/screens/CMsSkVDEuB0.jpg", // DaVinci / motion
+  "/screens/FukLaMhIYCw.jpg", // Fusion shape
 ];
+const TEXTURES = [SPECIAL, ...STILLS];
 
 type PanelData = {
   position: [number, number, number];
@@ -32,12 +32,16 @@ type PanelData = {
   facing: boolean;
 };
 
+const SPECIAL_PANEL = 2; // which panel shows the "get a quote" card
+
 function makePanels(count: number): PanelData[] {
   const panels: PanelData[] = [];
   for (let i = 0; i < count; i++) {
     const facing = Math.random() < 0.58; // ~58% face the viewer
     const angle = (i / count) * Math.PI * 2;
     const radius = 2.6 + Math.random() * 3.1;
+    // texture 0 = special (once); everyone else cycles the 4 stills evenly
+    const texIndex = i === SPECIAL_PANEL ? 0 : 1 + (i % STILLS.length);
     panels.push({
       position: [
         Math.cos(angle) * radius * (0.95 + Math.random() * 0.55),
@@ -48,8 +52,8 @@ function makePanels(count: number): PanelData[] {
         ? [(Math.random() - 0.5) * 0.16, (Math.random() - 0.5) * 0.24, (Math.random() - 0.5) * 0.1]
         : [(Math.random() - 0.5) * 0.7, (Math.random() - 0.5) * 1.6, (Math.random() - 0.5) * 0.4],
       scale: 0.62 + Math.random() * 0.9,
-      texIndex: i % SCREENS.length,
-      floatSpeed: 0.6 + Math.random() * 0.8,
+      texIndex,
+      floatSpeed: 0.36 + Math.random() * 0.48, // ~40% slower than before
       facing,
     });
   }
@@ -58,21 +62,21 @@ function makePanels(count: number): PanelData[] {
 
 function Panel({ data, tex }: { data: PanelData; tex: THREE.Texture }) {
   return (
-    <Float speed={data.floatSpeed} rotationIntensity={data.facing ? 0.14 : 0.4} floatIntensity={0.7}>
+    <Float speed={data.floatSpeed} rotationIntensity={data.facing ? 0.09 : 0.24} floatIntensity={0.42}>
       <group position={data.position} rotation={data.rotation} scale={data.scale}>
         {/* monitor bezel */}
         <mesh>
           <boxGeometry args={[1.74, 1.0, 0.07]} />
           <meshStandardMaterial color="#0e0b08" roughness={0.5} metalness={0.55} />
         </mesh>
-        {/* screen — real video frame, warm-tinted, softly self-lit */}
+        {/* screen — real still, warm-tinted, softly self-lit */}
         <mesh position={[0, 0, 0.04]}>
           <planeGeometry args={[1.56, 0.86]} />
           <meshStandardMaterial
             map={tex}
             emissiveMap={tex}
             emissive="#ff9642"
-            emissiveIntensity={0.8}
+            emissiveIntensity={0.78}
             color="#ffd4a6"
             roughness={0.6}
           />
@@ -83,7 +87,7 @@ function Panel({ data, tex }: { data: PanelData; tex: THREE.Texture }) {
 }
 
 function Panels() {
-  const textures = useTexture(SCREENS) as THREE.Texture[];
+  const textures = useTexture(TEXTURES) as THREE.Texture[];
   useMemo(() => {
     textures.forEach((t) => {
       t.colorSpace = THREE.SRGBColorSpace;
@@ -91,19 +95,19 @@ function Panels() {
     });
   }, [textures]);
 
-  const panels = useMemo(() => makePanels(26), []);
+  const panels = useMemo(() => makePanels(20), []);
   const group = useRef<THREE.Group>(null);
 
   useFrame((state) => {
     const g = group.current;
     if (!g) return;
     const t = state.clock.elapsedTime;
-    // gentle sway (not a full spin) so the facing screens keep facing you
-    const targetY = Math.sin(t * 0.08) * 0.28 + state.pointer.x * 0.26;
-    const targetX = -state.pointer.y * 0.14;
-    g.rotation.y += (targetY - g.rotation.y) * 0.04;
-    g.rotation.x += (targetX - g.rotation.x) * 0.04;
-    g.position.x += (state.pointer.x * 0.4 - g.position.x) * 0.03;
+    // slow sway (~40% slower) so facing screens keep facing you
+    const targetY = Math.sin(t * 0.05) * 0.2 + state.pointer.x * 0.22;
+    const targetX = -state.pointer.y * 0.12;
+    g.rotation.y += (targetY - g.rotation.y) * 0.025;
+    g.rotation.x += (targetX - g.rotation.x) * 0.025;
+    g.position.x += (state.pointer.x * 0.32 - g.position.x) * 0.02;
   });
 
   return (
@@ -133,11 +137,11 @@ export default function FilmScene() {
         <Panels />
       </Suspense>
 
-      <Sparkles count={80} scale={[13, 9, 6]} size={2.2} speed={0.28} opacity={0.5} color="#FFB84D" />
+      <Sparkles count={70} scale={[13, 9, 6]} size={2} speed={0.16} opacity={0.45} color="#FFB84D" />
 
       <EffectComposer>
-        <Bloom intensity={0.7} luminanceThreshold={0.32} luminanceSmoothing={0.9} mipmapBlur />
-        <Vignette offset={0.3} darkness={0.72} eskil={false} />
+        <Bloom intensity={0.62} luminanceThreshold={0.34} luminanceSmoothing={0.9} mipmapBlur />
+        <Vignette offset={0.3} darkness={0.74} eskil={false} />
       </EffectComposer>
     </Canvas>
   );
