@@ -29,11 +29,11 @@ export default function AboutPage() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <AnimatedSection className="mb-20">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent mb-4 font-medium">About</p>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground leading-[0.95]">
+          <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-accent">About</p>
+          <h1 className="font-display text-5xl font-semibold leading-[0.9] tracking-tight text-foreground md:text-7xl">
             Anakin
             <br />
-            Grierson.
+            <span className="text-ember">Grierson.</span>
           </h1>
         </AnimatedSection>
 
@@ -77,15 +77,15 @@ export default function AboutPage() {
         {/* CTA */}
         <AnimatedSection className="border-t border-border pt-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
           <div>
-            <p className="text-2xl font-bold text-foreground mb-2">Want to work together?</p>
+            <p className="mb-2 font-display text-2xl font-semibold text-foreground">Want to work together?</p>
             <p className="text-muted-foreground">Tell me what you&apos;re building. I&apos;ll tell you if I can help.</p>
           </div>
           <Link
             href="/contact"
-            className="flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-white text-sm font-medium hover:bg-accent-hover transition-colors group active:scale-[0.98]"
+            className="group flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-[#0B0A09] transition-all hover:scale-[1.03] hover:bg-accent-hover active:scale-[0.98]"
           >
             Get in touch
-            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+            <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
           </Link>
         </AnimatedSection>
       </div>

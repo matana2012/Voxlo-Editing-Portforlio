@@ -11,9 +11,9 @@ export default function ContactPage() {
     <div className="min-h-screen pt-32 pb-24 flex flex-col">
       <div className="max-w-2xl mx-auto w-full px-6 flex-1 flex flex-col justify-center">
         <div className="mb-16">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent mb-4 font-medium">Get a Quote</p>
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-            Let&apos;s talk about your project.
+          <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-accent">Get a Quote</p>
+          <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+            Let&apos;s talk about your <span className="text-ember">project.</span>
           </h1>
         </div>
         <ContactForm />

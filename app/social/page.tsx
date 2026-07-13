@@ -100,11 +100,11 @@ export default function SocialPage() {
 
         {/* Header */}
         <AnimatedSection className="mb-20">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent mb-4 font-medium">
+          <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-accent">
             Social
           </p>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground leading-[0.95]">
-            Find me.
+          <h1 className="font-display text-5xl font-semibold leading-[0.9] tracking-tight text-foreground md:text-7xl">
+            Find <span className="text-ember">me.</span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-md">
             Daily content, editing lessons, and behind the scenes.

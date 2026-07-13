@@ -85,7 +85,7 @@ export function LeadDetail({ lead, onClose, onStatusUpdate }: LeadDetailProps) {
             <div className="px-6 py-5 border-t border-border">
               <a
                 href={`mailto:${lead.email}?subject=Re: Your Voxlo Editing Inquiry&body=Hi ${lead.name},%0D%0A%0D%0AThanks for reaching out! I'd love to discuss your ${lead.project_type ?? "project"} further.%0D%0A%0D%0ABest,%0D%0AAnakin`}
-                className="flex items-center justify-center gap-2 w-full py-3 rounded-full bg-accent text-white text-sm font-medium hover:bg-accent-hover transition-colors active:scale-[0.98]"
+                className="flex items-center justify-center gap-2 w-full py-3 rounded-full bg-accent text-[#0B0A09] text-sm font-medium hover:bg-accent-hover transition-colors active:scale-[0.98]"
               >
                 <Mail className="h-4 w-4" />
                 Reply via Email

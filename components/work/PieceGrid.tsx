@@ -56,7 +56,7 @@ export function PieceGrid({ pieces, title, showFilter = false }: PieceGridProps)
               onClick={() => handleFilterChange(f.value)}
               className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
                 filter === f.value
-                  ? "bg-accent text-white"
+                  ? "bg-accent text-[#0B0A09]"
                   : "bg-white/5 text-muted-foreground hover:bg-white/10 hover:text-foreground"
               }`}
             >

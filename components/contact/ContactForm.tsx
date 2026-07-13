@@ -312,7 +312,7 @@ export function ContactForm() {
             disabled={!canAdvance()}
             className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
               canAdvance()
-                ? "bg-accent text-white hover:bg-accent-hover active:scale-[0.98]"
+                ? "bg-accent text-[#0B0A09] hover:bg-accent-hover active:scale-[0.98]"
                 : "bg-white/5 text-muted-foreground/40 cursor-not-allowed"
             }`}
           >
@@ -324,7 +324,7 @@ export function ContactForm() {
         {step === 5 && (
           <button
             onClick={advance}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium bg-accent text-white hover:bg-accent-hover active:scale-[0.98] transition-all duration-200"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium bg-accent text-[#0B0A09] hover:bg-accent-hover active:scale-[0.98] transition-all duration-200"
           >
             Review
             <ArrowRight className="h-4 w-4" />
@@ -335,7 +335,7 @@ export function ContactForm() {
           <button
             onClick={handleSubmit}
             disabled={submitting || !canSubmit()}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium bg-accent text-white hover:bg-accent-hover active:scale-[0.98] transition-all duration-200 disabled:opacity-50"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium bg-accent text-[#0B0A09] hover:bg-accent-hover active:scale-[0.98] transition-all duration-200 disabled:opacity-50"
           >
             {submitting ? (
               <>

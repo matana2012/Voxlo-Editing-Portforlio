@@ -83,7 +83,7 @@ export function LeadsList() {
               onClick={() => setStatusFilter(f.value)}
               className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 ${
                 statusFilter === f.value
-                  ? "bg-accent text-white"
+                  ? "bg-accent text-[#0B0A09]"
                   : "bg-white/5 text-muted-foreground hover:bg-white/10"
               }`}
             >

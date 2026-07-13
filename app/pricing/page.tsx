@@ -60,11 +60,11 @@ export default function PricingPage() {
 
         {/* Header */}
         <AnimatedSection className="mb-20">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent mb-4 font-medium">
+          <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-accent">
             Pricing
           </p>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground leading-[0.95]">
-            Rates.
+          <h1 className="font-display text-5xl font-semibold leading-[0.9] tracking-tight text-foreground md:text-7xl">
+            <span className="text-ember">Rates.</span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-lg">
             Starting points by project type. Every quote is scoped to your footage and timeline.
@@ -77,17 +77,17 @@ export default function PricingPage() {
             {tiers.map((tier) => (
               <div
                 key={tier.name}
-                className="rounded-2xl border border-border bg-white/[0.02] p-6 flex flex-col gap-5"
+                className="flex flex-col gap-5 rounded-2xl border border-border bg-muted/30 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40"
               >
-                <p className="text-[10px] uppercase tracking-[0.25em] text-muted-foreground font-medium">
+                <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-muted-foreground">
                   {tier.name}
                 </p>
 
                 <div>
                   <span
                     className={cn(
-                      "text-4xl font-bold leading-none tabular-nums",
-                      tier.price === "Custom" ? "text-accent" : "text-foreground"
+                      "font-display text-4xl font-semibold leading-none tabular-nums",
+                      tier.price === "Custom" ? "text-ember" : "text-foreground"
                     )}
                   >
                     {tier.price}
@@ -121,7 +121,7 @@ export default function PricingPage() {
 
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-accent text-white text-sm font-medium hover:bg-accent/90 active:scale-[0.98] transition-all duration-200"
+              className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-[#0B0A09] transition-all duration-200 hover:scale-[1.03] hover:bg-accent-hover active:scale-[0.98]"
             >
               Get a custom quote →
             </Link>
