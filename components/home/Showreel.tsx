@@ -13,8 +13,6 @@ export function Showreel() {
   const [muted, setMuted] = useState(true);
   const reduceMotion = useReducedMotion();
 
-  // controls=0 keeps the frame clean; our own button is the sole audio control.
-  // loop needs playlist=<id>; mute=1 is required for autoplay to be allowed.
   const src =
     `https://www.youtube.com/embed/${YT_ID}` +
     `?autoplay=1&mute=1&loop=1&playlist=${YT_ID}` +
@@ -29,47 +27,60 @@ export function Showreel() {
     setMuted((m) => !m);
   }
 
-  // Reveal only when reduced motion is NOT requested.
   const reveal = reduceMotion
     ? {}
     : {
-        initial: { opacity: 0, y: 24 },
+        initial: { opacity: 0, y: 28 },
         whileInView: { opacity: 1, y: 0 },
         viewport: { once: true, margin: "-80px" },
-        transition: { duration: 0.6, ease: EASE },
+        transition: { duration: 0.7, ease: EASE },
       };
 
   return (
     <section aria-labelledby="showreel-heading" className="px-6 py-20 sm:py-28">
-      <motion.div {...reveal} className="max-w-5xl mx-auto">
-        <p
-          id="showreel-heading"
-          className="text-xs uppercase tracking-[0.3em] text-accent mb-6 font-medium text-center"
-        >
-          Showreel
-        </p>
+      <motion.div {...reveal} className="mx-auto max-w-5xl">
+        <div className="mb-8 text-center">
+          <p
+            id="showreel-heading"
+            className="mb-3 text-xs font-medium uppercase tracking-[0.3em] text-accent"
+          >
+            The Reel
+          </p>
+          <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+            A minute of proof.
+          </h2>
+        </div>
 
-        <div className="relative aspect-video rounded-2xl overflow-hidden border border-border bg-black shadow-[0_20px_80px_rgba(0,0,0,0.4)]">
-          <iframe
-            ref={iframeRef}
-            src={src}
-            title="Voxlo Editing showreel"
-            allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-            allowFullScreen
-            className="absolute inset-0 w-full h-full"
+        <div className="relative">
+          {/* warm glow behind the frame */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] blur-3xl"
+            style={{ background: "radial-gradient(60% 60% at 50% 50%, rgba(232,98,10,0.28), transparent 75%)" }}
           />
 
-          {/* Unmute / mute control */}
-          <button
-            type="button"
-            onClick={toggleMute}
-            aria-label={muted ? "Unmute showreel" : "Mute showreel"}
-            aria-pressed={!muted}
-            className="absolute bottom-4 right-4 z-10 flex items-center gap-2 rounded-full bg-black/60 backdrop-blur-sm border border-white/20 text-white px-4 py-2 text-sm font-medium hover:bg-black/80 transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-          >
-            {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-            {muted ? "Unmute" : "Mute"}
-          </button>
+          <div className="relative aspect-video overflow-hidden rounded-2xl border border-accent/15 bg-black shadow-[0_40px_120px_-30px_rgba(0,0,0,0.8)]">
+            <iframe
+              ref={iframeRef}
+              src={src}
+              title="Voxlo Editing showreel"
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              allowFullScreen
+              className="absolute inset-0 h-full w-full"
+            />
+
+            {/* Unmute / mute control */}
+            <button
+              type="button"
+              onClick={toggleMute}
+              aria-label={muted ? "Unmute showreel" : "Mute showreel"}
+              aria-pressed={!muted}
+              className="absolute bottom-4 right-4 z-10 flex items-center gap-2 rounded-full border border-white/20 bg-black/60 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm transition-colors duration-200 hover:border-accent hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+            >
+              {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+              {muted ? "Unmute" : "Mute"}
+            </button>
+          </div>
         </div>
       </motion.div>
     </section>

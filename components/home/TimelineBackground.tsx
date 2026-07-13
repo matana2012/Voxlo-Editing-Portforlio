@@ -10,17 +10,17 @@ import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } f
  * Rendered behind everything; respects prefers-reduced-motion.
  */
 
-// Palette pulled from the showreel timeline — vivid clip colors.
+// Warm cinematic clip palette — ambers, embers, rust and cream to match the brand.
 const COLORS = [
-  "#EC4899", // pink
-  "#8B5CF6", // purple
-  "#3B82F6", // blue (accent)
-  "#60A5FA", // light blue
-  "#22C55E", // green
-  "#4ADE80", // light green
-  "#F97316", // orange
-  "#06B6D4", // cyan
-  "#E5E7EB", // white
+  "#F5A623", // amber
+  "#FF8A3D", // light orange
+  "#E8620A", // burnt orange
+  "#C1440E", // rust
+  "#8A2B0A", // ember red
+  "#7A3410", // deep brown
+  "#B4531C", // copper
+  "#F5C271", // pale gold
+  "#F4EEE4", // cream highlight
 ];
 
 // Deterministic pseudo-random (identical on server + client → no hydration mismatch).

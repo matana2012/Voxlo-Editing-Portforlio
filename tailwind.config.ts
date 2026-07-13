@@ -11,17 +11,20 @@ const config: Config = {
     extend: {
       fontFamily: {
         sans: ["Satoshi", "system-ui", "sans-serif"],
+        display: ["Clash Display", "Satoshi", "system-ui", "sans-serif"],
       },
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        muted: "var(--muted)",
-        "muted-foreground": "var(--muted-foreground)",
+        // RGB-channel tokens so Tailwind opacity modifiers (bg-accent/10 etc.) work.
+        background: "rgb(var(--background) / <alpha-value>)",
+        foreground: "rgb(var(--foreground) / <alpha-value>)",
+        muted: "rgb(var(--muted) / <alpha-value>)",
+        "muted-foreground": "rgb(var(--muted-foreground) / <alpha-value>)",
         border: "var(--border)",
         accent: {
-          DEFAULT: "#3B82F6",
-          hover: "#2563EB",
-          muted: "rgba(59,130,246,0.12)",
+          DEFAULT: "rgb(var(--accent) / <alpha-value>)",
+          hover: "rgb(var(--accent-hover) / <alpha-value>)",
+          strong: "rgb(var(--accent-strong) / <alpha-value>)",
+          soft: "var(--accent-soft)",
         },
       },
       screens: {
@@ -34,6 +37,8 @@ const config: Config = {
         "fade-in": "fadeIn 0.6s cubic-bezier(0.16,1,0.3,1) forwards",
         "slide-up": "slideUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards",
         chevron: "chevronBounce 2s ease-in-out infinite",
+        grain: "grain 0.6s steps(2) infinite",
+        "glow-pulse": "glowPulse 5s ease-in-out infinite",
       },
       keyframes: {
         fadeIn: {
@@ -47,6 +52,14 @@ const config: Config = {
         chevronBounce: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(6px)" },
+        },
+        grain: {
+          "0%, 100%": { transform: "translate(0, 0)" },
+          "50%": { transform: "translate(-3%, 2%)" },
+        },
+        glowPulse: {
+          "0%, 100%": { opacity: "0.5" },
+          "50%": { opacity: "0.85" },
         },
       },
     },

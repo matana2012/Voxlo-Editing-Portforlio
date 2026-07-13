@@ -9,7 +9,7 @@ export async function GET() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#0A0A0A",
+          background: "#0B0A09",
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
@@ -18,21 +18,21 @@ export async function GET() {
           fontFamily: "system-ui, sans-serif",
         }}
       >
-        {/* Blue accent line */}
+        {/* Amber accent line */}
         <div
           style={{
-            width: "60px",
-            height: "4px",
-            background: "#3B82F6",
+            width: "72px",
+            height: "5px",
+            background: "linear-gradient(100deg, #F5A623, #E8620A)",
             marginBottom: "32px",
-            borderRadius: "2px",
+            borderRadius: "3px",
           }}
         />
         <div
           style={{
-            fontSize: "80px",
+            fontSize: "84px",
             fontWeight: "700",
-            color: "#FAFAFA",
+            color: "#F4EEE4",
             letterSpacing: "-0.03em",
             lineHeight: "0.95",
             marginBottom: "24px",
@@ -43,11 +43,11 @@ export async function GET() {
         <div
           style={{
             fontSize: "28px",
-            color: "#71717A",
+            color: "#A69684",
             fontWeight: "500",
           }}
         >
-          Every frame, intentional.
+          Editing that keeps them watching.
         </div>
         <div
           style={{
@@ -55,7 +55,7 @@ export async function GET() {
             top: "80px",
             right: "80px",
             fontSize: "16px",
-            color: "#3B82F6",
+            color: "#F5A623",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             fontWeight: "500",

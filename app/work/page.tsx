@@ -15,12 +15,15 @@ export default function WorkPage() {
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <AnimatedSection className="mb-16">
-          <p className="text-xs uppercase tracking-[0.3em] text-accent mb-4 font-medium">Portfolio</p>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-foreground leading-[0.95]">
+          <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-accent">Portfolio</p>
+          <h1 className="font-display text-5xl font-semibold leading-[0.9] tracking-tight text-foreground md:text-7xl">
             Selected
             <br />
-            Work.
+            <span className="text-ember">Work.</span>
           </h1>
+          <p className="mt-6 max-w-lg text-lg text-muted-foreground">
+            The creators I edit for — and the cuts that keep their audiences watching.
+          </p>
         </AnimatedSection>
 
         {/* Channels — the main work, first thing you see */}

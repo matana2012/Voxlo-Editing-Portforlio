@@ -107,7 +107,7 @@ export function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className="text-3xl font-medium text-foreground"
+                    className="font-display text-4xl font-semibold text-foreground transition-colors hover:text-accent"
                   >
                     {link.label}
                   </Link>
@@ -137,8 +137,8 @@ function VoxloLogo({ className }: { className?: string }) {
       <polygon points="47,18 47,30 60,24" fill="currentColor" />
       {/* x */}
       <path d="M74 10L94 38M94 10L74 38" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
-      {/* blue accent diamond between x and l */}
-      <path d="M100 16L108 24L100 32L92 24Z" fill="#3B82F6" />
+      {/* amber accent diamond between x and l */}
+      <path d="M100 16L108 24L100 32L92 24Z" className="fill-accent" />
       {/* l */}
       <line x1="116" y1="8" x2="116" y2="38" stroke="currentColor" strokeWidth="4.5" strokeLinecap="round" />
       {/* o */}

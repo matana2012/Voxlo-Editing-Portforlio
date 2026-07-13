@@ -19,12 +19,12 @@ export function PieceCard({ piece, isSelected, onClick }: PieceCardProps) {
       whileHover={isClickable ? { scale: 1.02, boxShadow: "0 20px 60px rgba(0,0,0,0.4)" } : {}}
       whileTap={isClickable ? { scale: 0.99 } : {}}
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      className={`rounded-xl overflow-hidden border transition-colors duration-300 ${
+      className={`overflow-hidden rounded-xl border transition-colors duration-300 ${
         isClickable ? "cursor-pointer" : "cursor-default"
       } ${
         isSelected
-          ? "border-accent/60 shadow-[0_0_0_1px_hsl(var(--accent)/0.25)]"
-          : "border-border hover:border-white/20"
+          ? "border-accent/60 shadow-[0_0_0_1px_rgba(245,166,35,0.35)]"
+          : "border-border hover:border-accent/40"
       }`}
       onClick={() => isClickable && onClick(piece)}
       role={isClickable ? "button" : undefined}

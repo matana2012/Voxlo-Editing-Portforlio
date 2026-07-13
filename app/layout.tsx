@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { FilmGrain } from "@/components/ui/FilmGrain";
 import "./globals.css";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://voxloediting.com";
@@ -67,6 +68,7 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <FilmGrain />
         <Navbar />
         <main>{children}</main>
         <Footer />
