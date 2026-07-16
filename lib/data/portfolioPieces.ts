@@ -49,6 +49,17 @@ export const featuredPieces: PortfolioPiece[] = [
     featured: true,
   },
   {
+    id: "siege-graphic",
+    title: "Siege Graphic",
+    client: "Personal Project",
+    tags: ["3d", "gaming"],
+    whatWasDone: [],
+    tools: [],
+    thumbnailUrl: "https://img.youtube.com/vi/wls_o-J-Qpc/maxresdefault.jpg",
+    youtubeId: "wls_o-J-Qpc",
+    featured: true,
+  },
+  {
     id: "before-after-reel",
     title: "Before / After Reel",
     client: "Personal Project",
