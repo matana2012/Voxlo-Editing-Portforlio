@@ -12,28 +12,28 @@ export const metadata: Metadata = {
 const tiers = [
   {
     name: "Short-form / Reels",
-    price: "$60",
+    price: "$30",
     priceNote: "starting at",
     description:
       "TikTok, Reels, Shorts — hook-first structure, beat sync, format optimization (9:16).",
   },
   {
     name: "Mid-length video",
-    price: "$150",
+    price: "$100",
     priceNote: "starting at",
     description:
       "Up to ~15 min. Full narrative edit, B-roll integration, dynamic captions.",
   },
   {
     name: "Long-form",
-    price: "$250",
+    price: "$200",
     priceNote: "starting at",
     description:
       "30+ min. Pacing, retention structure, chapter markers, full audio mix.",
   },
   {
     name: "Cinematic / branded",
-    price: "$400",
+    price: "$300",
     priceNote: "starting at",
     description:
       "Brand-forward content, licensed music sync, motion logo, color identity.",
@@ -78,7 +78,7 @@ export default function PricingPage() {
               The short version
             </p>
             <p className="font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-              Starting at <span className="text-ember">$80</span>
+              Starting at <span className="text-ember">$70</span>
               <span className="text-2xl text-muted-foreground md:text-3xl">/video</span>
             </p>
             <p className="mt-3 max-w-md text-[15px] leading-relaxed text-muted-foreground">

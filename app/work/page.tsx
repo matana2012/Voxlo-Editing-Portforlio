@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { PieceGrid } from "@/components/work/PieceGrid";
 import { ChannelsGrid } from "@/components/work/ChannelsGrid";
+import { YouTubePlayer } from "@/components/work/YouTubePlayer";
 import { featuredPieces } from "@/lib/data/portfolioPieces";
+
+const CILUA_URL = "https://www.youtube.com/channel/UCULfftvB2jLST9E2zO2T7WQ";
 
 export const metadata: Metadata = {
   title: "Work",
@@ -29,6 +32,36 @@ export default function WorkPage() {
         {/* Channels — the main work, first thing you see */}
         <AnimatedSection delay={0.1}>
           <ChannelsGrid />
+        </AnimatedSection>
+
+        {/* Divider */}
+        <div className="my-24 border-t border-border" />
+
+        {/* Recently edited — big showcase */}
+        <AnimatedSection>
+          <section aria-labelledby="recent-heading">
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-accent">
+              Recently edited
+            </p>
+            <h2
+              id="recent-heading"
+              className="mb-3 font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl"
+            >
+              Latest cut for{" "}
+              <a
+                href={CILUA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-ember hover:underline"
+              >
+                cilua_
+              </a>
+            </h2>
+            <p className="mb-8 max-w-lg text-muted-foreground">
+              A video I recently edited for client cilua_.
+            </p>
+            <YouTubePlayer id="wqIXwFEtYEk" title="Recently edited video for cilua_" />
+          </section>
         </AnimatedSection>
 
         {/* Divider */}
