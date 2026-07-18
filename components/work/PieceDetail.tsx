@@ -2,7 +2,6 @@
 
 import { X, ArrowUpRight } from "lucide-react";
 import type { PortfolioPiece } from "@/lib/data/portfolioPieces";
-import { YouTubePlayer } from "./YouTubePlayer";
 
 interface PieceDetailProps {
   piece: PortfolioPiece;
@@ -21,14 +20,22 @@ const CATEGORY_LABELS: Record<string, string> = {
 
 export function PieceDetail({ piece, onClose }: PieceDetailProps) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-white/[0.03]">
+    <div className="overflow-hidden rounded-2xl border border-border bg-muted">
       <div className="p-4 sm:p-6 md:p-8">
 
-        {/* ── Video player (plays inline on click) ──────────────── */}
+        {/* ── Video player (autoplays when opened) ──────────────── */}
         {piece.youtubeId ? (
-          <YouTubePlayer id={piece.youtubeId} title={piece.title} poster={piece.thumbnailUrl} />
+          <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-border bg-black">
+            <iframe
+              className="absolute inset-0 h-full w-full"
+              src={`https://www.youtube.com/embed/${piece.youtubeId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+              title={piece.title}
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              allowFullScreen
+            />
+          </div>
         ) : (
-          <div className="flex aspect-video w-full items-center justify-center rounded-xl border border-border bg-muted">
+          <div className="flex aspect-video w-full items-center justify-center rounded-xl border border-border bg-black/40">
             <p className="text-sm text-muted-foreground">Video coming soon</p>
           </div>
         )}

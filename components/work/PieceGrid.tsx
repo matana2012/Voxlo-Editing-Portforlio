@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { PieceCard } from "./PieceCard";
 import { PieceDetail } from "./PieceDetail";
@@ -39,6 +39,21 @@ export function PieceGrid({ pieces, title, showFilter = false }: PieceGridProps)
     setFilter(value);
     setSelectedId(null);
   }
+
+  // Close on Escape + lock body scroll while the modal is open.
+  useEffect(() => {
+    if (!selectedPiece) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedId(null);
+    };
+    document.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [selectedPiece]);
 
   return (
     <div>
@@ -91,18 +106,32 @@ export function PieceGrid({ pieces, title, showFilter = false }: PieceGridProps)
         </AnimatePresence>
       </motion.div>
 
-      {/* Inline detail panel — slides in below the grid */}
+      {/* Detail modal — centered overlay, video autoplays on open */}
       <AnimatePresence>
         {selectedPiece && (
           <motion.div
-            key="detail-panel"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="mt-6"
+            key="detail-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/80 p-4 backdrop-blur-sm sm:p-6 md:p-10"
+            onClick={() => setSelectedId(null)}
+            role="dialog"
+            aria-modal="true"
+            aria-label={selectedPiece.title}
           >
-            <PieceDetail piece={selectedPiece} onClose={() => setSelectedId(null)} />
+            <motion.div
+              key="detail-panel"
+              initial={{ opacity: 0, scale: 0.97, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.97, y: 12 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="my-auto w-full max-w-4xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <PieceDetail piece={selectedPiece} onClose={() => setSelectedId(null)} />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
