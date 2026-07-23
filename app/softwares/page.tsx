@@ -39,7 +39,6 @@ const categories: Category[] = [
     blurb: "Thumbnails, overlays, and everything that has to look sharp.",
     items: [
       { name: "Photopea", slug: "photopea" },
-      { name: "Canva", slug: "canva" },
     ],
   },
   {
@@ -54,8 +53,7 @@ const categories: Category[] = [
     title: "Development",
     blurb: "Building and automating the workflow behind the scenes.",
     items: [
-      { name: "Claude Code", slug: "claude-code" },
-      { name: "Claude", slug: "claude" },
+      { name: "Claude (Anthropic)", slug: "claude" },
     ],
   },
 ];
@@ -93,17 +91,17 @@ export default function SoftwaresPage() {
                 </h2>
                 <p className="mt-2 mb-8 max-w-md text-muted-foreground">{cat.blurb}</p>
 
-                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                   {cat.items.map((item) => (
                     <div
                       key={item.slug}
-                      className="flex items-center gap-4 rounded-2xl border border-border bg-muted/30 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40"
+                      className="flex items-center gap-5 rounded-2xl border border-border bg-muted/30 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40"
                     >
-                      <div className="flex h-16 w-16 flex-shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border bg-background p-2.5">
+                      <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-border bg-background p-3.5">
                         <SoftwareLogo src={`/logos/${item.slug}.png`} name={item.name} />
                       </div>
                       <div className="min-w-0">
-                        <p className="font-display text-lg font-semibold text-foreground">
+                        <p className="font-display text-xl font-semibold text-foreground">
                           {item.name}
                         </p>
                         {item.note && (

@@ -15,7 +15,9 @@ export function SoftwareLogo({ src, name }: SoftwareLogoProps) {
   const [failed, setFailed] = useState(false);
 
   const initials = name
+    .replace(/[^a-zA-Z0-9\s]/g, "")
     .split(/\s+/)
+    .filter(Boolean)
     .map((w) => w[0])
     .join("")
     .slice(0, 2)
