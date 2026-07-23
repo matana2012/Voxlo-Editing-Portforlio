@@ -7,10 +7,41 @@ import { featuredPieces } from "@/lib/data/portfolioPieces";
 
 const CILUA_URL = "https://www.youtube.com/channel/UCULfftvB2jLST9E2zO2T7WQ";
 
+const LATEST_CUT_TOOLS = ["DaVinci Resolve", "Claude"];
+const BEST_WORK_TOOLS = [
+  "DaVinci Resolve",
+  "DaVinci Fusion",
+  "Fairlight",
+  "Photopea",
+  "OBS",
+  "Flashback",
+  "Claude",
+];
+
 export const metadata: Metadata = {
   title: "Work",
   description: "Channels I edit for, plus a selection of gaming, 3D, cinematic, and branded editing work.",
 };
+
+function ToolTags({ tools }: { tools: string[] }) {
+  return (
+    <div className="mb-8">
+      <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.3em] text-accent">
+        Made with
+      </p>
+      <div className="flex flex-wrap gap-2">
+        {tools.map((tool) => (
+          <span
+            key={tool}
+            className="rounded-full border border-border bg-white/5 px-3 py-1.5 text-xs text-foreground/80"
+          >
+            {tool}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function WorkPage() {
   return (
@@ -57,9 +88,10 @@ export default function WorkPage() {
                 cilua_
               </a>
             </h2>
-            <p className="mb-8 max-w-lg text-muted-foreground">
+            <p className="mb-6 max-w-lg text-muted-foreground">
               A video I recently edited for client cilua_.
             </p>
+            <ToolTags tools={LATEST_CUT_TOOLS} />
             <YouTubePlayer id="wqIXwFEtYEk" title="Recently edited video for cilua_" />
           </section>
         </AnimatedSection>
@@ -82,7 +114,7 @@ export default function WorkPage() {
             <p className="mb-6 max-w-xl text-muted-foreground">
               Showcases storytelling, editing, Fusion effects, color grading, and 4K footage.
             </p>
-            <div className="mb-8 flex flex-wrap gap-2">
+            <div className="mb-6 flex flex-wrap gap-2">
               {["Storytelling", "Editing", "Fusion effects", "Color grading", "4K footage"].map(
                 (chip) => (
                   <span
@@ -94,6 +126,7 @@ export default function WorkPage() {
                 )
               )}
             </div>
+            <ToolTags tools={BEST_WORK_TOOLS} />
             <YouTubePlayer id="zqv5NnJoDno" title="My best work showcase" />
           </section>
         </AnimatedSection>
