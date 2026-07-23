@@ -67,6 +67,40 @@ export default function WorkPage() {
         {/* Divider */}
         <div className="my-24 border-t border-border" />
 
+        {/* Best work — the flagship showcase */}
+        <AnimatedSection>
+          <section aria-labelledby="best-heading">
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-accent">
+              My best work
+            </p>
+            <h2
+              id="best-heading"
+              className="mb-3 font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl"
+            >
+              The one I&apos;m <span className="text-ember">proudest</span> of.
+            </h2>
+            <p className="mb-6 max-w-xl text-muted-foreground">
+              Showcases storytelling, editing, Fusion effects, color grading, and 4K footage.
+            </p>
+            <div className="mb-8 flex flex-wrap gap-2">
+              {["Storytelling", "Editing", "Fusion effects", "Color grading", "4K footage"].map(
+                (chip) => (
+                  <span
+                    key={chip}
+                    className="rounded-full border border-accent/25 bg-accent-soft px-3 py-1.5 text-xs font-medium text-foreground/80"
+                  >
+                    {chip}
+                  </span>
+                )
+              )}
+            </div>
+            <YouTubePlayer id="zqv5NnJoDno" title="My best work showcase" />
+          </section>
+        </AnimatedSection>
+
+        {/* Divider */}
+        <div className="my-24 border-t border-border" />
+
         {/* Featured pieces — scroll down to reach the individual edits */}
         <AnimatedSection>
           <PieceGrid pieces={featuredPieces} title="Featured Edits" showFilter={false} />
