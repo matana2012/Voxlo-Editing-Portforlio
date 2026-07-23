@@ -3,11 +3,12 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { PieceGrid } from "@/components/work/PieceGrid";
 import { ChannelsGrid } from "@/components/work/ChannelsGrid";
 import { YouTubePlayer } from "@/components/work/YouTubePlayer";
+import { ToolTag } from "@/components/work/ToolTag";
 import { featuredPieces } from "@/lib/data/portfolioPieces";
 
 const CILUA_URL = "https://www.youtube.com/channel/UCULfftvB2jLST9E2zO2T7WQ";
 
-const LATEST_CUT_TOOLS = ["DaVinci Resolve", "Claude"];
+const LATEST_CUT_TOOLS = ["DaVinci Resolve", "DaVinci Fusion", "Fairlight", "Claude"];
 const BEST_WORK_TOOLS = [
   "DaVinci Resolve",
   "DaVinci Fusion",
@@ -31,12 +32,7 @@ function ToolTags({ tools }: { tools: string[] }) {
       </p>
       <div className="flex flex-wrap gap-2">
         {tools.map((tool) => (
-          <span
-            key={tool}
-            className="rounded-full border border-border bg-white/5 px-3 py-1.5 text-xs text-foreground/80"
-          >
-            {tool}
-          </span>
+          <ToolTag key={tool} name={tool} />
         ))}
       </div>
     </div>

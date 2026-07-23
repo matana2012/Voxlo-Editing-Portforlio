@@ -2,6 +2,7 @@
 
 import { X, ArrowUpRight } from "lucide-react";
 import type { PortfolioPiece } from "@/lib/data/portfolioPieces";
+import { ToolTag } from "./ToolTag";
 
 interface PieceDetailProps {
   piece: PortfolioPiece;
@@ -124,12 +125,7 @@ export function PieceDetail({ piece, onClose }: PieceDetailProps) {
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {piece.tools.map((tool) => (
-                          <span
-                            key={tool}
-                            className="rounded-full border border-border bg-white/5 px-3 py-1.5 text-xs text-foreground/80"
-                          >
-                            {tool}
-                          </span>
+                          <ToolTag key={tool} name={tool} />
                         ))}
                       </div>
                     </div>
