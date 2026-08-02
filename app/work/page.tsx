@@ -3,12 +3,10 @@ import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { PieceGrid } from "@/components/work/PieceGrid";
 import { ChannelsGrid } from "@/components/work/ChannelsGrid";
 import { YouTubePlayer } from "@/components/work/YouTubePlayer";
+import { ClientGallery } from "@/components/work/ClientGallery";
 import { ToolTag } from "@/components/work/ToolTag";
 import { featuredPieces } from "@/lib/data/portfolioPieces";
 
-const CILUA_URL = "https://www.youtube.com/channel/UCULfftvB2jLST9E2zO2T7WQ";
-
-const LATEST_CUT_TOOLS = ["DaVinci Resolve", "DaVinci Fusion", "Fairlight", "Claude"];
 const BEST_WORK_TOOLS = [
   "DaVinci Resolve",
   "DaVinci Fusion",
@@ -64,31 +62,22 @@ export default function WorkPage() {
         {/* Divider */}
         <div className="my-24 border-t border-border" />
 
-        {/* Recently edited — big showcase */}
+        {/* Client Work — gallery of videos edited for clients */}
         <AnimatedSection>
-          <section aria-labelledby="recent-heading">
+          <section aria-labelledby="client-heading">
             <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-accent">
-              Recently edited
+              Client work
             </p>
             <h2
-              id="recent-heading"
+              id="client-heading"
               className="mb-3 font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl"
             >
-              Latest cut for{" "}
-              <a
-                href={CILUA_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-ember hover:underline"
-              >
-                cilua_
-              </a>
+              Videos I&apos;ve <span className="text-ember">edited.</span>
             </h2>
-            <p className="mb-6 max-w-lg text-muted-foreground">
-              A video I recently edited for client cilua_.
+            <p className="mb-12 max-w-lg text-muted-foreground">
+              A growing gallery of work delivered for creators and clients.
             </p>
-            <ToolTags tools={LATEST_CUT_TOOLS} />
-            <YouTubePlayer id="wqIXwFEtYEk" title="Recently edited video for cilua_" />
+            <ClientGallery />
           </section>
         </AnimatedSection>
 

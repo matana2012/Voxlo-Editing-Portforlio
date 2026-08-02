@@ -36,6 +36,12 @@ const channels: Channel[] = [
     url: "https://www.youtube.com/@marqnova",
     pfp: "/marq_nova_pfp.jpg",
   },
+  {
+    name: "RustyOldMan",
+    description: "Rust YouTuber who makes build tutorials.",
+    url: "https://www.youtube.com/@RustyOldMan",
+    pfp: "/rustyoldman_pfp.png",
+  },
 ];
 
 export function ChannelsGrid() {
