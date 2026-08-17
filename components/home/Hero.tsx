@@ -1,21 +1,26 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Hero3D } from "@/components/home/hero3d/Hero3D";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-const TAGLINE = "Every frame, intentional.";
+const TAGLINE = "Cuts that keep people watching.";
 
 export function Hero() {
-  return (
-    <section className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden">
-      {/* Interactive 3D film scene (static fallback on mobile / reduced-motion) */}
-      <Hero3D />
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
 
+  // Hand off to the first portfolio piece: the headline block fades and
+  // lifts out as the visitor scrolls past the hero, rather than a hard cut.
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0, 0.7], ["0%", "-8%"]);
+
+  return (
+    <section ref={ref} className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden">
       {/* Warm key-light glow */}
       <div
         aria-hidden
@@ -40,7 +45,10 @@ export function Hero() {
         }}
       />
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 text-center">
+      <motion.div
+        style={{ opacity: contentOpacity, y: contentY }}
+        className="relative z-10 mx-auto max-w-5xl px-6 text-center"
+      >
         {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
@@ -105,7 +113,7 @@ export function Hero() {
             <Link href="/contact">Get a Quote</Link>
           </Button>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll cue */}
       <motion.div

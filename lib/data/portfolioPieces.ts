@@ -26,6 +26,16 @@ export interface PortfolioPiece {
   placeholder?: boolean;
 }
 
+export const CATEGORY_LABELS: Record<PieceCategory, string> = {
+  "3d": "3D",
+  gaming: "Gaming",
+  irl: "IRL",
+  "short-form": "Short-Form",
+  "long-form": "Long-Form",
+  branded: "Branded",
+  "before-after": "Before / After",
+};
+
 // ── Featured grid (shown first, no filter) ───────────────────────────────────
 
 export const featuredPieces: PortfolioPiece[] = [

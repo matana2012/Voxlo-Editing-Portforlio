@@ -1,21 +1,22 @@
-import { Hero } from "@/components/home/Hero";
 import { TimelineBackground } from "@/components/home/TimelineBackground";
-import { Showreel } from "@/components/home/Showreel";
-import { CapabilityStrip } from "@/components/home/CapabilityStrip";
-import { ProcessSection } from "@/components/home/ProcessSection";
+import { Hero } from "@/components/home/Hero";
+import { PortfolioReveal } from "@/components/home/PortfolioReveal";
+import { BeforeAfter } from "@/components/home/BeforeAfter";
+import { ProcessScrubber } from "@/components/home/ProcessScrubber";
+import { About } from "@/components/home/About";
 import { TestimonialsSection } from "@/components/home/TestimonialsSection";
-import { FAQSection } from "@/components/home/FAQSection";
+import { ContactStrip } from "@/components/home/ContactStrip";
 
 export default function HomePage() {
   return (
-    <>
-      <TimelineBackground />
+    <TimelineBackground>
       <Hero />
-      <Showreel />
-      <CapabilityStrip />
-      <ProcessSection />
+      <PortfolioReveal />
+      <BeforeAfter />
+      <ProcessScrubber />
+      <About />
       <TestimonialsSection />
-      <FAQSection />
-    </>
+      <ContactStrip />
+    </TimelineBackground>
   );
 }

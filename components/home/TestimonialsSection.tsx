@@ -1,37 +1,52 @@
 "use client";
 
+import Image from "next/image";
 import { Quote } from "lucide-react";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
 
-/**
- * Elevated testimonial cards. Placeholders for now — replace `quote`, `channel`
- * and `subs` with real client words as they approve them (set placeholder:false).
- */
 type Testimonial = {
   quote: string;
   channel: string;
-  subs: string;
+  subs?: string;
+  pfp: string;
   placeholder?: boolean;
 };
 
 const testimonials: Testimonial[] = [
   {
-    quote: "A line about how the edit lifted retention and views will live right here.",
-    channel: "Creator channel",
-    subs: "1K–10K subscribers",
-    placeholder: true,
+    quote: "I genuinely appreciate the amount of effort you did while making of this video",
+    channel: "Vincent Global Services",
+    pfp: "/vincent_global_pfp.png",
   },
   {
-    quote: "A short, punchy quote from a happy creator goes here once approved.",
-    channel: "Creator channel",
-    subs: "1K–10K subscribers",
-    placeholder: true,
+    quote: "damn dude that didnt take that long lol",
+    channel: "cilua_",
+    subs: "3.5K subscribers",
+    pfp: "/cilua_pfp.png",
   },
   {
-    quote: "Another client's words about turnaround, quality, or the vibe of working together.",
-    channel: "Creator channel",
-    subs: "1K–10K subscribers",
-    placeholder: true,
+    quote: "I think its pretty damn good",
+    channel: "cilua_",
+    subs: "3.5K subscribers",
+    pfp: "/cilua_pfp.png",
+  },
+  {
+    quote: "Looks good.",
+    channel: "RustyOldMan",
+    subs: "10K subscribers",
+    pfp: "/rustyoldman_pfp.png",
+  },
+  {
+    quote: "Perfect!",
+    channel: "RustyOldMan",
+    subs: "10K subscribers",
+    pfp: "/rustyoldman_pfp.png",
+  },
+  {
+    quote: "I'll use your cut and see how the video does",
+    channel: "RustyOldMan",
+    subs: "10K subscribers",
+    pfp: "/rustyoldman_pfp.png",
   },
 ];
 
@@ -57,9 +72,14 @@ export function TestimonialsSection() {
               >
                 {t.quote}
               </blockquote>
-              <figcaption className="border-t border-border pt-5">
-                <p className="font-display text-base font-medium text-foreground">{t.channel}</p>
-                <p className="mt-0.5 text-sm text-muted-foreground">{t.subs}</p>
+              <figcaption className="flex items-center gap-3 border-t border-border pt-5">
+                <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-full border border-border bg-muted">
+                  <Image src={t.pfp} alt={`${t.channel} avatar`} fill sizes="40px" className="object-cover" />
+                </div>
+                <div>
+                  <p className="font-display text-base font-medium text-foreground">{t.channel}</p>
+                  {t.subs && <p className="mt-0.5 text-sm text-muted-foreground">{t.subs}</p>}
+                </div>
               </figcaption>
               {t.placeholder && (
                 <span className="absolute right-5 top-5 rounded-full border border-border px-2.5 py-0.5 text-[10px] uppercase tracking-widest text-muted-foreground/60">

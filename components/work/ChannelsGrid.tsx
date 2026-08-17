@@ -7,11 +7,18 @@ import { StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
 interface Channel {
   name: string;
   description: string;
-  url: string;
+  url: string | null;
   pfp: string;
 }
 
 const channels: Channel[] = [
+  {
+    name: "Vincent Global Services",
+    description:
+      "A professional corporate solutions provider delivering strategic consulting, business operations support, and global growth services.",
+    url: null,
+    pfp: "/vincent_global_pfp.png",
+  },
   {
     name: "cilua_",
     description: "A marathon gaming channel that creates great and informational content.",
@@ -61,39 +68,55 @@ export function ChannelsGrid() {
       </p>
 
       <StaggerContainer className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:gap-8 lg:grid-cols-4">
-        {channels.map((channel) => (
-          <StaggerItem key={channel.name}>
-            <a
-              href={channel.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Visit ${channel.name} on YouTube (opens in a new tab)`}
-              className="group flex flex-col items-center text-center focus-visible:outline-none"
-            >
-              {/* Large circular avatar — object-cover crops any aspect ratio to a circle */}
-              <div className="relative h-40 w-40 flex-shrink-0 overflow-hidden rounded-full border-2 border-border bg-muted transition-all duration-300 group-hover:scale-[1.04] group-hover:border-accent group-hover:shadow-[0_0_55px_-8px_rgba(245,166,35,0.55)] group-focus-visible:border-accent group-focus-visible:ring-2 group-focus-visible:ring-accent group-focus-visible:ring-offset-4 group-focus-visible:ring-offset-background sm:h-44 sm:w-44 md:h-52 md:w-52">
-                <Image
-                  src={channel.pfp}
-                  alt={`${channel.name} channel avatar`}
-                  fill
-                  sizes="(max-width: 640px) 160px, 208px"
-                  className="object-cover"
-                />
-              </div>
+        {channels.map((channel) => {
+          const avatar = (
+            <div className="relative h-40 w-40 flex-shrink-0 overflow-hidden rounded-full border-2 border-border bg-muted transition-all duration-300 group-hover:scale-[1.04] group-hover:border-accent group-hover:shadow-[0_0_55px_-8px_rgba(245,166,35,0.55)] group-focus-visible:border-accent group-focus-visible:ring-2 group-focus-visible:ring-accent group-focus-visible:ring-offset-4 group-focus-visible:ring-offset-background sm:h-44 sm:w-44 md:h-52 md:w-52">
+              <Image
+                src={channel.pfp}
+                alt={`${channel.name} channel avatar`}
+                fill
+                sizes="(max-width: 640px) 160px, 208px"
+                className="object-cover"
+              />
+            </div>
+          );
 
+          const content = (
+            <>
+              {avatar}
               <div className="mt-6 flex items-center gap-1.5">
                 <h3 className="font-display text-2xl font-semibold text-foreground transition-colors duration-200 group-hover:text-accent">
                   {channel.name}
                 </h3>
-                <ArrowUpRight className="h-5 w-5 text-muted-foreground/40 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
+                {channel.url && (
+                  <ArrowUpRight className="h-5 w-5 text-muted-foreground/40 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent" />
+                )}
               </div>
 
               <p className="mt-3 max-w-[28ch] text-[15px] leading-relaxed text-muted-foreground">
                 {channel.description}
               </p>
-            </a>
-          </StaggerItem>
-        ))}
+            </>
+          );
+
+          return (
+            <StaggerItem key={channel.name}>
+              {channel.url ? (
+                <a
+                  href={channel.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit ${channel.name} on YouTube (opens in a new tab)`}
+                  className="group flex flex-col items-center text-center focus-visible:outline-none"
+                >
+                  {content}
+                </a>
+              ) : (
+                <div className="group flex flex-col items-center text-center">{content}</div>
+              )}
+            </StaggerItem>
+          );
+        })}
       </StaggerContainer>
     </section>
   );

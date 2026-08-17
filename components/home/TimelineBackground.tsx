@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
+import { TimelineScrollContext } from "./TimelineScrollContext";
 
 /**
  * Scroll-driven "editing timeline" background.
@@ -56,9 +57,11 @@ interface ColumnProps {
   tracks: ReturnType<typeof buildColumn>;
   y: MotionValue<string> | string;
   rotate: MotionValue<number> | number;
+  x: MotionValue<string> | string;
+  opacity: MotionValue<number> | number;
 }
 
-function Column({ side, tracks, y, rotate }: ColumnProps) {
+function Column({ side, tracks, y, rotate, x, opacity }: ColumnProps) {
   const isLeft = side === "left";
   return (
     <div
@@ -70,11 +73,13 @@ function Column({ side, tracks, y, rotate }: ColumnProps) {
       <motion.div
         style={{
           y,
+          x,
+          opacity,
           rotateY: rotate,
           transformOrigin: isLeft ? "left center" : "right center",
           transformStyle: "preserve-3d",
         }}
-        className={`absolute top-1/2 flex -translate-y-1/2 flex-row gap-[9px] opacity-60 will-change-transform ${
+        className={`absolute top-1/2 flex -translate-y-1/2 flex-row gap-[9px] will-change-transform ${
           isLeft ? "left-0" : "right-0 flex-row-reverse"
         }`}
       >
@@ -113,7 +118,7 @@ function Column({ side, tracks, y, rotate }: ColumnProps) {
   );
 }
 
-export function TimelineBackground() {
+export function TimelineBackground({ children }: { children?: React.ReactNode }) {
   const { scrollYProgress } = useScroll();
 
   // Travel downward and rotate further into perspective while scrolling.
@@ -122,14 +127,24 @@ export function TimelineBackground() {
   const rotL = useTransform(scrollYProgress, [0, 1], [24, 52]);
   const rotR = useTransform(scrollYProgress, [0, 1], [-24, -52]);
 
-  return (
-    <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-      <Column side="left" tracks={leftColumn} y={y} rotate={rotL} />
-      <Column side="right" tracks={rightColumn} y={y} rotate={rotR} />
+  // Hero → Portfolio handoff: columns pull inward to "frame" the first
+  // piece of real work as the visitor scrolls past the hero, instead of
+  // just continuing to drift past in the background.
+  const xL = useTransform(scrollYProgress, [0, 0.08], ["0vw", "7vw"]);
+  const xR = useTransform(scrollYProgress, [0, 0.08], ["0vw", "-7vw"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.08], [0.6, 0.8]);
 
-      {/* Gentle top/bottom fade so the columns dissolve into the page edges. */}
-      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
-    </div>
+  return (
+    <TimelineScrollContext.Provider value={scrollYProgress}>
+      <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <Column side="left" tracks={leftColumn} y={y} rotate={rotL} x={xL} opacity={opacity} />
+        <Column side="right" tracks={rightColumn} y={y} rotate={rotR} x={xR} opacity={opacity} />
+
+        {/* Gentle top/bottom fade so the columns dissolve into the page edges. */}
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-background to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-background to-transparent" />
+      </div>
+      {children}
+    </TimelineScrollContext.Provider>
   );
 }

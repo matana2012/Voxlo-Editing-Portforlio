@@ -1,23 +1,13 @@
 "use client";
 
 import { X, ArrowUpRight } from "lucide-react";
-import type { PortfolioPiece } from "@/lib/data/portfolioPieces";
+import { CATEGORY_LABELS, type PortfolioPiece } from "@/lib/data/portfolioPieces";
 import { ToolTag } from "./ToolTag";
 
 interface PieceDetailProps {
   piece: PortfolioPiece;
   onClose: () => void;
 }
-
-const CATEGORY_LABELS: Record<string, string> = {
-  "3d": "3D",
-  gaming: "Gaming",
-  irl: "IRL",
-  "short-form": "Short-Form",
-  "long-form": "Long-Form",
-  branded: "Branded",
-  "before-after": "Before / After",
-};
 
 export function PieceDetail({ piece, onClose }: PieceDetailProps) {
   return (

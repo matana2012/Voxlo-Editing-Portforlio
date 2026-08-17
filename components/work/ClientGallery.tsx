@@ -16,6 +16,7 @@ const clients: ClientVideo[] = [
     url: "https://www.youtube.com/channel/UCULfftvB2jLST9E2zO2T7WQ",
   },
   { id: "SjgItP2Z3ik", name: "RustyOldMan", url: "https://www.youtube.com/@RustyOldMan" },
+  { id: "TICh6aCtReM", name: "Vincent Global Services", url: "https://www.youtube.com/shorts/TICh6aCtReM" },
 ];
 
 export function ClientGallery() {
