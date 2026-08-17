@@ -7,9 +7,18 @@ import { PortfolioPieceReveal } from "./PortfolioPieceReveal";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-// Real, shippable pieces only — the before/after piece gets its own
-// dedicated section further down the page, not a duplicate slot here.
-const pieces = featuredPieces.filter((p) => !p.placeholder && !p.tags.includes("before-after"));
+// Real client/channel work only, in a hand-picked order — the Forza piece
+// closes the section since it's the longest, most produced showcase.
+const HOMEPAGE_ORDER = [
+  "klentbolt-showcase",
+  "cilua-showcase",
+  "rustyoldman-showcase",
+  "vincent-global-showcase",
+  "forza-gold-wristband",
+];
+const pieces = HOMEPAGE_ORDER.map((id) => featuredPieces.find((p) => p.id === id)).filter(
+  (p): p is (typeof featuredPieces)[number] => p !== undefined
+);
 
 export function PortfolioReveal() {
   const [expandedId, setExpandedId] = useState<string | null>(null);

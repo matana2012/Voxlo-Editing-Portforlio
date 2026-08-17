@@ -5,6 +5,9 @@ interface ClientVideo {
   id: string;
   name: string;
   url: string;
+  /** Static cover + external link instead of an inline embed (for Shorts whose YouTube cover frame won't render). */
+  poster?: string;
+  videoUrl?: string;
 }
 
 // Client videos I've edited — add new entries here and they flow into the gallery.
@@ -16,7 +19,13 @@ const clients: ClientVideo[] = [
     url: "https://www.youtube.com/channel/UCULfftvB2jLST9E2zO2T7WQ",
   },
   { id: "SjgItP2Z3ik", name: "RustyOldMan", url: "https://www.youtube.com/@RustyOldMan" },
-  { id: "TICh6aCtReM", name: "Vincent Global Services", url: "https://www.youtube.com/shorts/TICh6aCtReM" },
+  {
+    id: "TICh6aCtReM",
+    name: "Vincent Global Services",
+    url: "https://www.youtube.com/shorts/TICh6aCtReM",
+    poster: "/vincent_global_cover.png",
+    videoUrl: "https://www.youtube.com/shorts/TICh6aCtReM",
+  },
 ];
 
 export function ClientGallery() {
@@ -24,7 +33,12 @@ export function ClientGallery() {
     <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2">
       {clients.map((client) => (
         <div key={client.id}>
-          <YouTubePlayer id={client.id} title={`Video edited for ${client.name}`} />
+          <YouTubePlayer
+            id={client.id}
+            title={`Video edited for ${client.name}`}
+            poster={client.poster}
+            linkUrl={client.videoUrl}
+          />
           <div className="mt-4 flex items-center justify-between gap-3">
             <a
               href={client.url}

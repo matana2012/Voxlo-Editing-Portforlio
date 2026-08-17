@@ -48,7 +48,12 @@ export function PortfolioPieceReveal({ piece, index, isExpanded, onToggle }: Por
         layout
         className={cn(!isExpanded && variant.align === "right" ? "md:order-2" : undefined)}
       >
-        <YouTubePlayer id={piece.youtubeId ?? ""} title={piece.title} poster={piece.thumbnailUrl} />
+        <YouTubePlayer
+          id={piece.youtubeId ?? ""}
+          title={piece.title}
+          poster={piece.thumbnailUrl}
+          linkUrl={piece.videoUrl}
+        />
       </motion.div>
 
       {/* Meta */}

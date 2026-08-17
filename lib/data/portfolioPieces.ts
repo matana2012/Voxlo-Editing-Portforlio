@@ -24,6 +24,8 @@ export interface PortfolioPiece {
   youtubeId: string | null;
   featured: boolean;
   placeholder?: boolean;
+  /** Static cover + external link instead of an inline embed (for Shorts whose YouTube cover frame won't render). */
+  videoUrl?: string;
 }
 
 export const CATEGORY_LABELS: Record<PieceCategory, string> = {
@@ -56,6 +58,54 @@ export const featuredPieces: PortfolioPiece[] = [
     tools: ["DaVinci Resolve", "DaVinci Fusion", "Fairlight", "Photopea", "OBS", "Claude"],
     thumbnailUrl: "https://img.youtube.com/vi/bAd-krnnVqQ/maxresdefault.jpg",
     youtubeId: "bAd-krnnVqQ",
+    featured: true,
+  },
+  {
+    id: "klentbolt-showcase",
+    title: "Edited for klentbolt",
+    client: "@klentbolt",
+    clientUrl: "https://www.youtube.com/@klentbolt",
+    tags: ["gaming", "long-form"],
+    whatWasDone: [],
+    tools: [],
+    thumbnailUrl: null,
+    youtubeId: "zqv5NnJoDno",
+    featured: true,
+  },
+  {
+    id: "cilua-showcase",
+    title: "Edited for cilua_",
+    client: "cilua_",
+    clientUrl: "https://www.youtube.com/channel/UCULfftvB2jLST9E2zO2T7WQ",
+    tags: ["gaming"],
+    whatWasDone: [],
+    tools: [],
+    thumbnailUrl: null,
+    youtubeId: "wqIXwFEtYEk",
+    featured: true,
+  },
+  {
+    id: "rustyoldman-showcase",
+    title: "Edited for RustyOldMan",
+    client: "RustyOldMan",
+    clientUrl: "https://www.youtube.com/@RustyOldMan",
+    tags: ["gaming"],
+    whatWasDone: [],
+    tools: [],
+    thumbnailUrl: null,
+    youtubeId: "SjgItP2Z3ik",
+    featured: true,
+  },
+  {
+    id: "vincent-global-showcase",
+    title: "Edited for Vincent Global Services",
+    client: "Vincent Global Services",
+    tags: ["branded", "short-form"],
+    whatWasDone: [],
+    tools: [],
+    thumbnailUrl: "/vincent_global_cover.png",
+    youtubeId: "TICh6aCtReM",
+    videoUrl: "https://www.youtube.com/shorts/TICh6aCtReM",
     featured: true,
   },
   {
