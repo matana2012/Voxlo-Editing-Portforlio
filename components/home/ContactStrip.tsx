@@ -12,7 +12,7 @@ export function ContactStrip() {
           Have a video in mind?
         </h2>
         <p className="mt-4 text-lg text-muted-foreground">
-          Send it over. I'll tell you what I'd change.
+          Send it over. I&apos;ll tell you what I&apos;d change.
         </p>
         <Link
           href="/contact"

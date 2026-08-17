@@ -21,14 +21,15 @@ const GRADED_SRC = "/video/before-after-graded.mp4";
 const HAS_VIDEO = false; // flip once the two files above exist in /public/video
 
 export function BeforeAfter() {
-  if (!piece) return null;
   const { value, trackRef, onTrackClick, onDrag, onKeyDown } = useDragScrubber(50);
   const clip = useMotionTemplate`inset(0 0 0 ${value}%)`;
   const left = useMotionTemplate`${value}%`;
-  const thumb = getYouTubeThumbnail(piece.youtubeId ?? "");
 
   const [reveal, setReveal] = useState(() => Math.round(value.get()));
   useMotionValueEvent(value, "change", (latest) => setReveal(Math.round(latest)));
+
+  if (!piece) return null;
+  const thumb = getYouTubeThumbnail(piece.youtubeId ?? "");
 
   return (
     <section className="px-6 py-24 md:py-32">
