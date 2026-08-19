@@ -83,11 +83,7 @@ export function BeforeAfter() {
 
           {/* Handle */}
           <motion.div
-            drag="x"
-            dragConstraints={trackRef}
-            dragElastic={0}
-            dragMomentum={false}
-            onDrag={onDrag}
+            onPan={onDrag}
             style={{ left, x: "-50%" }}
             className="absolute top-0 z-10 flex h-full w-11 -translate-x-1/2 cursor-ew-resize items-center justify-center"
           >

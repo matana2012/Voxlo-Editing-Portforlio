@@ -67,7 +67,7 @@ export function ChannelsGrid() {
         The creators I edit for. This is the main work.
       </p>
 
-      <StaggerContainer className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:gap-8 lg:grid-cols-4">
+      <StaggerContainer className="flex flex-wrap justify-center gap-x-10 gap-y-10 md:gap-x-8 md:gap-y-8">
         {channels.map((channel) => {
           const avatar = (
             <div className="relative h-40 w-40 flex-shrink-0 overflow-hidden rounded-full border-2 border-border bg-muted transition-all duration-300 group-hover:scale-[1.04] group-hover:border-accent group-hover:shadow-[0_0_55px_-8px_rgba(245,166,35,0.55)] group-focus-visible:border-accent group-focus-visible:ring-2 group-focus-visible:ring-accent group-focus-visible:ring-offset-4 group-focus-visible:ring-offset-background sm:h-44 sm:w-44 md:h-52 md:w-52">
@@ -100,7 +100,10 @@ export function ChannelsGrid() {
           );
 
           return (
-            <StaggerItem key={channel.name}>
+            <StaggerItem
+              key={channel.name}
+              className="w-full sm:w-[calc(50%-1.25rem)] lg:w-[calc(25%-1.5rem)]"
+            >
               {channel.url ? (
                 <a
                   href={channel.url}

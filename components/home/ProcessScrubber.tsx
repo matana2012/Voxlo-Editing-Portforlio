@@ -135,11 +135,7 @@ export function ProcessScrubber() {
           className="relative h-px w-full cursor-pointer bg-border outline-none"
         >
           <motion.div
-            drag="x"
-            dragConstraints={trackRef}
-            dragElastic={0}
-            dragMomentum={false}
-            onDrag={onDrag}
+            onPan={onDrag}
             style={{ left, x: "-50%" }}
             className="absolute -top-3 z-10 h-6 w-4 cursor-ew-resize"
           >

@@ -5,7 +5,7 @@ import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Anakin Grierson — freelance video editor behind Voxlo Editing.",
+  description: "Anakin Matthew — freelance video editor behind Voxlo Editing.",
 };
 
 const values = [
@@ -21,6 +21,10 @@ const values = [
     label: "Think like the audience",
     description: "I edit for whoever's watching, not whoever's paying. If it doesn't hold their attention, it needs to change.",
   },
+  {
+    label: "Adapt to the creator",
+    description: "Minimal and clean or high-energy and loud — I match the style the content actually needs, not the one I'd default to.",
+  },
 ];
 
 export default function AboutPage() {
@@ -33,7 +37,7 @@ export default function AboutPage() {
           <h1 className="font-display text-5xl font-semibold leading-[0.9] tracking-tight text-foreground md:text-7xl">
             Anakin
             <br />
-            <span className="text-ember">Grierson.</span>
+            <span className="text-ember">Matthew.</span>
           </h1>
         </AnimatedSection>
 
@@ -41,6 +45,9 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-24">
           <AnimatedSection>
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
+              <p>
+                I&apos;m 18, and I&apos;m building Voxlo from scratch, full-time, out of the East Coast.
+              </p>
               <p>
                 I&apos;m a freelance video editor with a focus on content that moves people — literally and figuratively.
                 Voxlo is the name I work under. The work ranges from 3D motion integration and gaming edits to
@@ -86,6 +93,16 @@ export default function AboutPage() {
           >
             Get in touch
             <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+          </Link>
+        </AnimatedSection>
+
+        {/* Portfolio pointer */}
+        <AnimatedSection className="mt-16 text-center">
+          <Link
+            href="/work"
+            className="text-sm text-muted-foreground transition-colors hover:text-accent"
+          >
+            Don&apos;t take my word for it — see the work.
           </Link>
         </AnimatedSection>
       </div>

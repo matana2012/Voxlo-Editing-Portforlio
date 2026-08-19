@@ -10,14 +10,14 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://voxloediting.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Voxlo Editing — Freelance Creative Editing by Anakin Grierson",
+    default: "Voxlo Editing — Freelance Creative Editing by Anakin Matthew",
     template: "%s | Voxlo Editing",
   },
   description:
     "Premium freelance video editing specializing in 3D motion, gaming, branded content, and IRL lifestyle. Editing that earns attention.",
-  keywords: ["video editing", "freelance editor", "3D editing", "gaming edits", "branded content", "Anakin Grierson", "Voxlo"],
-  authors: [{ name: "Anakin Grierson" }],
-  creator: "Anakin Grierson",
+  keywords: ["video editing", "freelance editor", "3D editing", "gaming edits", "branded content", "Anakin Matthew", "Voxlo"],
+  authors: [{ name: "Anakin Matthew" }],
+  creator: "Anakin Matthew",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Voxlo Editing",
-    description: "Premium freelance video editing by Anakin Grierson.",
+    description: "Premium freelance video editing by Anakin Matthew.",
     images: [`${SITE_URL}/api/og`],
   },
   icons: {

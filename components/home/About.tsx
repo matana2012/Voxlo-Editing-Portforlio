@@ -12,7 +12,7 @@ export function About() {
       <AnimatedSection className="mx-auto max-w-2xl">
         <p className="mb-6 text-xs font-medium uppercase tracking-[0.3em] text-accent">Who&apos;s editing</p>
         <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-          Anakin Grierson.
+          Anakin Matthew.
         </h2>
         <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
           I edit under the name Voxlo. It&apos;s just me — no team, no account manager, no
