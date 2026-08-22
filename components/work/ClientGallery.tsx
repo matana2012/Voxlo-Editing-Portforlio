@@ -12,6 +12,7 @@ interface ClientVideo {
 
 // Client videos I've edited — add new entries here and they flow into the gallery.
 const clients: ClientVideo[] = [
+  { id: "x7-ozxHciac", name: "Ren", url: "https://www.youtube.com/@Ren.rl4/featured" },
   { id: "zqv5NnJoDno", name: "klentbolt", url: "https://www.youtube.com/@klentbolt" },
   {
     id: "wqIXwFEtYEk",

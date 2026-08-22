@@ -90,7 +90,7 @@ export function PortfolioPieceReveal({ piece, index, isExpanded, onToggle }: Por
           {piece.runtime && <span className="text-muted-foreground/40">· {piece.runtime}</span>}
         </p>
 
-        {!showTools && detailItems.length > 0 && (
+        {!isExpanded && !showTools && detailItems.length > 0 && (
           <ul className="mt-6 space-y-2.5">
             {detailItems.map((item, i) => (
               <li key={i} className="flex items-start gap-2.5 text-sm leading-relaxed text-muted-foreground">
@@ -101,7 +101,7 @@ export function PortfolioPieceReveal({ piece, index, isExpanded, onToggle }: Por
           </ul>
         )}
 
-        {showTools && (
+        {!isExpanded && showTools && (
           <div className="mt-6 flex flex-wrap gap-2">
             {piece.tools.map((tool) => (
               <ToolTag key={tool} name={tool} />

@@ -13,6 +13,13 @@ interface Channel {
 
 const channels: Channel[] = [
   {
+    name: "Ren",
+    description:
+      "A Rocket League gamer grinding out daily uploads and documenting his road to Grand Champion, one match at a time.",
+    url: "https://www.youtube.com/@Ren.rl4/featured",
+    pfp: "/ren_pfp.jpg",
+  },
+  {
     name: "Vincent Global Services",
     description:
       "A professional corporate solutions provider delivering strategic consulting, business operations support, and global growth services.",
