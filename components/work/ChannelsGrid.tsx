@@ -77,7 +77,7 @@ export function ChannelsGrid() {
       <StaggerContainer className="flex flex-wrap justify-center gap-x-10 gap-y-10 md:gap-x-8 md:gap-y-8">
         {channels.map((channel) => {
           const avatar = (
-            <div className="relative h-40 w-40 flex-shrink-0 overflow-hidden rounded-full border-2 border-border bg-muted transition-all duration-300 group-hover:scale-[1.04] group-hover:border-accent group-hover:shadow-[0_0_55px_-8px_rgba(245,166,35,0.55)] group-focus-visible:border-accent group-focus-visible:ring-2 group-focus-visible:ring-accent group-focus-visible:ring-offset-4 group-focus-visible:ring-offset-background sm:h-44 sm:w-44 md:h-52 md:w-52">
+            <div className="relative h-40 w-40 flex-shrink-0 overflow-hidden rounded-full border-2 border-border bg-muted transition-all duration-300 group-hover:scale-[1.04] group-hover:border-accent group-hover:shadow-[0_0_55px_-8px_rgb(var(--accent)/0.55)] group-focus-visible:border-accent group-focus-visible:ring-2 group-focus-visible:ring-accent group-focus-visible:ring-offset-4 group-focus-visible:ring-offset-background sm:h-44 sm:w-44 md:h-52 md:w-52">
               <Image
                 src={channel.pfp}
                 alt={`${channel.name} channel avatar`}

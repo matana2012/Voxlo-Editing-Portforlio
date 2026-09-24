@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
+import { Annotation } from "@/components/ui/Annotation";
 
 export const metadata: Metadata = {
   title: "About",
   description: "Anakin Matthew — freelance video editor behind Voxlo Editing.",
 };
+
+const socials = [
+  { label: "Instagram", handle: "@_voxlo_", href: "https://www.instagram.com/_voxlo_/" },
+  { label: "TikTok", handle: "@_voxlo_", href: "https://www.tiktok.com/@_voxlo_" },
+  { label: "X", handle: "@clypz__", href: "https://x.com/clypz__" },
+];
 
 const values = [
   {
@@ -29,7 +36,7 @@ const values = [
 
 export default function AboutPage() {
   return (
-    <div className="pt-32 pb-24">
+    <div className="world-grid min-h-screen pt-32 pb-24">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <AnimatedSection className="mb-20">
@@ -63,11 +70,34 @@ export default function AboutPage() {
                 attention, not a template and an export.
               </p>
             </div>
+
+            <div className="mt-12">
+              <Annotation className="mb-4 block">Follow</Annotation>
+              <ul className="border-t border-line/25">
+                {socials.map((s) => (
+                  <li key={s.label} className="border-b border-line/25">
+                    <a
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex items-center justify-between py-3.5 transition-colors hover:text-gold"
+                    >
+                      <span className="text-cream group-hover:text-gold">{s.label}</span>
+                      <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground group-hover:text-gold">
+                        {s.handle}
+                        <ArrowUpRight className="h-3.5 w-3.5" />
+                      </span>
+                      <span className="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </AnimatedSection>
 
           {/* Values */}
           <AnimatedSection delay={0.1}>
-            <p className="text-xs uppercase tracking-widest text-muted-foreground/40 mb-8 font-medium">How I work</p>
+            <Annotation className="mb-8 block">How I work</Annotation>
             <StaggerContainer className="space-y-6">
               {values.map((v) => (
                 <StaggerItem key={v.label}>
@@ -89,7 +119,7 @@ export default function AboutPage() {
           </div>
           <Link
             href="/contact"
-            className="group flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-[#0B0A09] transition-all hover:scale-[1.03] hover:bg-accent-hover active:scale-[0.98]"
+            className="group flex items-center gap-2 rounded-md bg-accent px-6 py-3 text-sm font-semibold text-background transition-all hover:scale-[1.03] hover:bg-accent-hover active:scale-[0.98]"
           >
             Get in touch
             <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />

@@ -8,7 +8,7 @@ import { PortfolioPieceReveal } from "./PortfolioPieceReveal";
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 // Real client/channel work only, in a hand-picked order.
-const HOMEPAGE_ORDER = [
+export const HOMEPAGE_ORDER = [
   "klentbolt-showcase",
   "ren-showcase",
   "cilua-showcase",

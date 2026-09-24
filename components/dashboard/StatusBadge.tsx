@@ -46,7 +46,7 @@ export function StatusBadge({ leadId, status, onUpdate }: StatusBadgeProps) {
             <button
               key={opt.value}
               onClick={() => updateStatus(opt.value)}
-              className="w-full text-left px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors"
+              className="w-full text-left px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-foreground/5 transition-colors"
             >
               {opt.label}
             </button>

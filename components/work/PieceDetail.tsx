@@ -2,6 +2,7 @@
 
 import { X, ArrowUpRight } from "lucide-react";
 import { CATEGORY_LABELS, type PortfolioPiece } from "@/lib/data/portfolioPieces";
+import { Annotation } from "@/components/ui/Annotation";
 import { ToolTag } from "./ToolTag";
 
 interface PieceDetailProps {
@@ -11,7 +12,7 @@ interface PieceDetailProps {
 
 export function PieceDetail({ piece, onClose }: PieceDetailProps) {
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-muted">
+    <div className="overflow-hidden rounded-lg border border-border bg-muted">
       <div className="p-4 sm:p-6 md:p-8">
 
         {/* ── Video player (autoplays when opened) ──────────────── */}
@@ -37,12 +38,12 @@ export function PieceDetail({ piece, onClose }: PieceDetailProps) {
             {/* Tags */}
             <div className="mb-3 flex flex-wrap gap-1.5">
               {piece.tags.map((tag) => (
-                <span
+                <Annotation
                   key={tag}
-                  className="rounded-full border border-border bg-white/5 px-2.5 py-1 text-[10px] uppercase tracking-widest text-muted-foreground"
+                  className="rounded-md border border-border bg-foreground/5 px-2.5 py-1"
                 >
                   {CATEGORY_LABELS[tag] ?? tag}
-                </span>
+                </Annotation>
               ))}
             </div>
 
@@ -78,7 +79,7 @@ export function PieceDetail({ piece, onClose }: PieceDetailProps) {
           {/* Close */}
           <button
             onClick={onClose}
-            className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-border bg-white/5 text-muted-foreground transition-colors hover:bg-white/10 hover:text-foreground"
+            className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-border bg-foreground/5 text-muted-foreground transition-colors hover:bg-foreground/10 hover:text-foreground"
             aria-label="Close details"
           >
             <X className="h-3.5 w-3.5" />

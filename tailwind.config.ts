@@ -10,25 +10,54 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Satoshi", "system-ui", "sans-serif"],
-        display: ["Clash Display", "Satoshi", "system-ui", "sans-serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Georgia", "serif"],
+        mono: ["var(--font-mono)", "ui-monospace", "monospace"],
       },
       colors: {
+        navy: { DEFAULT: "rgb(var(--navy) / <alpha-value>)", deep: "rgb(var(--navy-deep) / <alpha-value>)" },
+        gold: "rgb(var(--gold) / <alpha-value>)",
+        cream: "rgb(var(--cream) / <alpha-value>)",
+        line: "rgb(var(--line) / <alpha-value>)",
         // RGB-channel tokens so Tailwind opacity modifiers (bg-accent/10 etc.) work.
         background: "rgb(var(--background) / <alpha-value>)",
         foreground: "rgb(var(--foreground) / <alpha-value>)",
         muted: "rgb(var(--muted) / <alpha-value>)",
         "muted-foreground": "rgb(var(--muted-foreground) / <alpha-value>)",
         border: "var(--border)",
+        // Two-surface-anchor lift tiers (canvas -> surface-1 -> surface-2), never opacity tricks.
+        surface: {
+          1: "rgb(var(--surface-1) / <alpha-value>)",
+          2: "rgb(var(--surface-2) / <alpha-value>)",
+        },
+        // Technical-blue hairline grid. Decorative structural wallpaper only — never interactive.
+        grid: "rgb(var(--grid) / <alpha-value>)",
+        // Gold — the one brand accent: primary CTAs and brand moments only.
         accent: {
           DEFAULT: "rgb(var(--accent) / <alpha-value>)",
           hover: "rgb(var(--accent-hover) / <alpha-value>)",
           strong: "rgb(var(--accent-strong) / <alpha-value>)",
           soft: "var(--accent-soft)",
         },
+        // Royal blue — the one interactive-signal accent: links, hover, focus. Never decorative.
+        signal: {
+          DEFAULT: "rgb(var(--signal) / <alpha-value>)",
+          hover: "rgb(var(--signal-hover) / <alpha-value>)",
+          soft: "var(--signal-soft)",
+        },
       },
       screens: {
         xs: "375px",
+      },
+      // Drafted, not bubbly: corners are barely softened everywhere except true circles.
+      borderRadius: {
+        sm: "1px",
+        DEFAULT: "2px",
+        md: "2px",
+        lg: "2px",
+        xl: "3px",
+        "2xl": "3px",
+        "3xl": "4px",
       },
       transitionTimingFunction: {
         apple: "cubic-bezier(0.16, 1, 0.3, 1)",

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ui/AnimatedSection";
+import { Annotation } from "@/components/ui/Annotation";
 import { CheckCircle2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -84,14 +85,16 @@ export default function ServicesPage() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                 {/* Left */}
                 <div>
-                  <p className="text-xs uppercase tracking-widest text-accent mb-4 font-medium">0{i + 1}</p>
+                  <Annotation variant="index" className="mb-4 block text-accent">
+                    {String(i + 1).padStart(2, "0")}
+                  </Annotation>
                   <h2 className="mb-4 font-display text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
                     {service.label}
                   </h2>
                   <p className="text-xl text-muted-foreground mb-6 font-medium">{service.tagline}</p>
                   <p className="text-muted-foreground leading-relaxed mb-8">{service.description}</p>
-                  <div className="text-sm text-muted-foreground/60 bg-white/3 border border-border rounded-xl px-5 py-4">
-                    <p className="text-xs uppercase tracking-widest text-muted-foreground/40 mb-2 font-medium">Ideal for</p>
+                  <div className="text-sm text-muted-foreground/60 bg-foreground/5 border border-border rounded-lg px-5 py-4">
+                    <Annotation className="mb-2 block">Ideal for</Annotation>
                     <p className="text-sm text-muted-foreground leading-relaxed">{service.idealClient}</p>
                   </div>
                 </div>
@@ -100,7 +103,7 @@ export default function ServicesPage() {
                 <StaggerContainer className="space-y-8">
                   <StaggerItem>
                     <div>
-                      <p className="text-xs uppercase tracking-widest text-muted-foreground/40 mb-4 font-medium">What&apos;s included</p>
+                      <Annotation className="mb-4 block">What&apos;s included</Annotation>
                       <ul className="space-y-3">
                         {service.includes.map((item) => (
                           <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
@@ -113,11 +116,11 @@ export default function ServicesPage() {
                   </StaggerItem>
                   <StaggerItem>
                     <div>
-                      <p className="text-xs uppercase tracking-widest text-muted-foreground/40 mb-4 font-medium">Deliverables</p>
+                      <Annotation className="mb-4 block">Deliverables</Annotation>
                       <ul className="space-y-2">
                         {service.deliverables.map((item) => (
                           <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
-                            <span className="mt-2 w-1 h-1 rounded-full bg-accent flex-shrink-0" />
+                            <span className="mt-2 w-1 h-1 rounded-md bg-accent flex-shrink-0" />
                             {item}
                           </li>
                         ))}
@@ -138,7 +141,7 @@ export default function ServicesPage() {
           </div>
           <Link
             href="/contact"
-            className="group flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-[#0B0A09] transition-colors hover:bg-accent-hover active:scale-[0.98]"
+            className="group flex items-center gap-2 rounded-md bg-accent px-6 py-3 text-sm font-semibold text-background transition-colors hover:bg-accent-hover active:scale-[0.98]"
           >
             Get a Quote
             <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />

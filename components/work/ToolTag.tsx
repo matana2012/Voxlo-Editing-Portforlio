@@ -1,6 +1,6 @@
 // Maps a tool name to its logo in /public/logos. Names must match the strings
 // used in portfolioPieces tools[] and the Work page tool lists.
-const TOOL_LOGOS: Record<string, string> = {
+export const TOOL_LOGOS: Record<string, string> = {
   "DaVinci Resolve": "/logos/davinci-resolve.png",
   "DaVinci Fusion": "/logos/davinci-fusion.png",
   Fairlight: "/logos/fairlight.png",
@@ -17,7 +17,7 @@ const TOOL_LOGOS: Record<string, string> = {
 export function ToolTag({ name }: { name: string }) {
   const logo = TOOL_LOGOS[name];
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-white/5 px-2.5 py-1.5 text-xs text-foreground/80">
+    <span className="inline-flex items-center gap-1.5 rounded-md border border-border bg-foreground/5 px-2.5 py-1.5 font-mono text-xs text-foreground/80">
       {logo && (
         // eslint-disable-next-line @next/next/no-img-element
         <img

@@ -29,14 +29,14 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 RESEND_API_KEY=re_xxxxxxxx          # Optional — for lead email alerts
 ADMIN_EMAIL=griersonanakin@gmail.com # Where lead alerts go
-NEXT_PUBLIC_SITE_URL=https://voxloediting.com
+NEXT_PUBLIC_SITE_URL=https://voxlo.org
 ```
 
 4. Deploy. Done.
 
 ### 3. Connect a custom domain
 
-Vercel → Settings → Domains → Add `voxloediting.com`
+Vercel → Settings → Domains → Add `voxlo.org`
 
 ---
 

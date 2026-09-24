@@ -19,12 +19,12 @@ export function PieceCard({ piece, isSelected, onClick }: PieceCardProps) {
       whileHover={isClickable ? { scale: 1.02, boxShadow: "0 20px 60px rgba(0,0,0,0.4)" } : {}}
       whileTap={isClickable ? { scale: 0.99 } : {}}
       transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      className={`overflow-hidden rounded-xl border transition-colors duration-300 ${
+      className={`overflow-hidden rounded-lg border transition-colors duration-300 ${
         isClickable ? "cursor-pointer" : "cursor-default"
       } ${
         isSelected
-          ? "border-accent/60 shadow-[0_0_0_1px_rgba(245,166,35,0.35)]"
-          : "border-border hover:border-accent/40"
+          ? "border-accent/60 shadow-[0_0_0_1px_rgb(var(--accent)/0.35)]"
+          : "border-border hover:border-signal/40"
       }`}
       onClick={() => isClickable && onClick(piece)}
       role={isClickable ? "button" : undefined}
@@ -34,7 +34,7 @@ export function PieceCard({ piece, isSelected, onClick }: PieceCardProps) {
       aria-expanded={isClickable ? isSelected : undefined}
     >
       {/* Thumbnail */}
-      <div className="relative overflow-hidden bg-white/5 aspect-video group">
+      <div className="relative overflow-hidden bg-foreground/5 aspect-video group">
         {piece.thumbnailUrl && !piece.placeholder ? (
           <Image
             src={piece.thumbnailUrl}
@@ -48,13 +48,13 @@ export function PieceCard({ piece, isSelected, onClick }: PieceCardProps) {
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center gap-2">
-            <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center">
-              <Play className="h-5 w-5 text-white/20 ml-0.5" />
+            <div className="w-12 h-12 rounded-full bg-foreground/5 flex items-center justify-center">
+              <Play className="h-5 w-5 text-foreground/20 ml-0.5" />
             </div>
             {piece.client !== "Personal Project" && (
-              <p className="text-white/30 text-xs font-medium">{piece.client}</p>
+              <p className="text-foreground/30 text-xs font-medium">{piece.client}</p>
             )}
-            <p className="text-white/20 text-xs">Coming soon</p>
+            <p className="text-foreground/20 text-xs">Coming soon</p>
           </div>
         )}
 
@@ -72,7 +72,7 @@ export function PieceCard({ piece, isSelected, onClick }: PieceCardProps) {
           {piece.tags.slice(0, 2).map((tag) => (
             <span
               key={tag}
-              className="text-[10px] uppercase tracking-widest bg-black/60 backdrop-blur-sm text-white/70 px-2.5 py-1 rounded-full border border-white/10"
+              className="text-[10px] uppercase tracking-widest bg-black/60 backdrop-blur-sm text-white/70 px-2.5 py-1 rounded-md border border-white/10"
             >
               {tag}
             </span>

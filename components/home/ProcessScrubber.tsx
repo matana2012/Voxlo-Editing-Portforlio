@@ -7,9 +7,16 @@ import { cn } from "@/lib/utils";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
-// Warm clip palette, matching TimelineBackground's — a deliberate callback
-// rather than a new decorative element.
-const BAR_COLORS = ["#F5A623", "#FF8A3D", "#E8620A", "#C1440E", "#8A2B0A", "#B4531C"];
+// Gold/signal tonal set — the same two accent roles the rest of the system
+// uses, read here as a waveform rather than a decorative palette of its own.
+const BAR_COLORS = [
+  "rgb(var(--accent))",
+  "rgb(var(--signal))",
+  "rgb(var(--accent-hover))",
+  "rgb(var(--signal-hover))",
+  "rgb(var(--accent-strong))",
+  "rgba(var(--grid), 0.9)",
+];
 
 const STAGES = [
   {
@@ -67,7 +74,7 @@ function MotionVisual() {
           animate={{ rotate: [0, 8, 0], scale: [1, 1.06, 1] }}
           transition={{ duration: 2.4, repeat: Infinity, delay: i * 0.3, ease: "easeInOut" }}
           className="h-10 w-10 rounded-[3px] border border-accent/50"
-          style={{ background: `linear-gradient(135deg, rgba(245,166,35,0.25), transparent)` }}
+          style={{ background: `linear-gradient(135deg, rgba(var(--accent),0.25), transparent)` }}
         />
       ))}
     </div>

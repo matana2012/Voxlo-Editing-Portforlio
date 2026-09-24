@@ -1,108 +1,128 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { ChevronDown, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const EASE = [0.16, 1, 0.3, 1] as const;
+import { Annotation } from "@/components/ui/Annotation";
+import { constructHeadline, drawLines } from "@/lib/motion/blueprint";
 
 const TAGLINE = "Cuts that keep people watching.";
 
+/**
+ * The identity station's first viewport — not a centered marketing banner.
+ * VOXLO and EDITING are two separate typographic elements at different
+ * positions on the sheet, joined by a real construction line, with a
+ * title-block panel (tagline + CTAs) framed like a drawing's spec box.
+ * Entrance is a sequenced construction: VOXLO draws in, the connector line
+ * draws between the two words, EDITING draws in, then the title block
+ * settles — never a single centered fade-up.
+ */
 export function Hero() {
-  const ref = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const voxloRef = useRef<HTMLHeadingElement>(null);
+  const editingRef = useRef<HTMLHeadingElement>(null);
+  const lineRef = useRef<SVGPathElement>(null);
+  const ranOnce = useRef(false);
 
-  // Hand off to the first portfolio piece: the headline block fades and
-  // lifts out as the visitor scrolls past the hero, rather than a hard cut.
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const contentY = useTransform(scrollYProgress, [0, 0.7], ["0%", "-8%"]);
+  useEffect(() => {
+    // Guard against React StrictMode's dev-only double-invoke: splitText on
+    // mixed markup doesn't round-trip cleanly through split -> revert -> split.
+    if (ranOnce.current || !voxloRef.current || !editingRef.current) return;
+    ranOnce.current = true;
+    constructHeadline(voxloRef.current, { staggerMs: 26, delay: 150 });
+    if (lineRef.current) drawLines(lineRef.current, { duration: 650, delay: 620 });
+    constructHeadline(editingRef.current, { staggerMs: 26, delay: 950 });
+  }, []);
 
   return (
-    <section ref={ref} className="relative flex min-h-[100svh] flex-col items-center justify-center overflow-hidden">
-      {/* Warm key-light glow */}
+    <div className="relative min-h-[92svh] w-full overflow-hidden">
+      {/* Ambient light — kept subtle so it reads as scene lighting, not a centered glow behind a headline */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
-          background: "radial-gradient(55% 50% at 50% 38%, rgba(245,166,35,0.12), transparent 72%)",
-        }}
-      />
-      {/* Legibility vignette behind the headline column — gives the text weight */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background: "radial-gradient(42% 46% at 50% 52%, rgba(11,10,9,0.62), transparent 78%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background: "radial-gradient(26% 60% at 50% 50%, rgba(11,10,9,0.5), transparent 72%)",
+          background: "radial-gradient(60% 55% at 30% 25%, rgb(var(--accent) / 0.10), transparent 70%)",
         }}
       />
 
-      <motion.div
-        style={{ opacity: contentOpacity, y: contentY }}
-        className="relative z-10 mx-auto max-w-5xl px-6 text-center"
+      {/* Viewport corner brackets — this station frames the whole sheet, not a content box */}
+      <div aria-hidden className="pointer-events-none absolute inset-4 sm:inset-6">
+        {(["tl", "tr", "bl", "br"] as const).map((corner) => (
+          <svg
+            key={corner}
+            className={`absolute h-10 w-10 text-grid ${
+              {
+                tl: "left-0 top-0",
+                tr: "right-0 top-0 -scale-x-100",
+                bl: "left-0 bottom-0 -scale-y-100",
+                br: "right-0 bottom-0 -scale-100",
+              }[corner]
+            }`}
+            viewBox="0 0 28 28"
+            fill="none"
+          >
+            <path d="M2 12 V2 H12" stroke="currentColor" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+          </svg>
+        ))}
+      </div>
+
+      {/* Construction line joining VOXLO to EDITING — a real drawn connector, not decoration floating free */}
+      <svg
+        aria-hidden
+        className="pointer-events-none absolute inset-0 h-full w-full"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
       >
-        {/* Eyebrow */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: EASE, delay: 0.1 }}
-          className="mb-8 inline-flex items-center gap-2 rounded-full border border-border bg-background/40 px-4 py-1.5 backdrop-blur-sm"
-        >
-          <span className="h-1.5 w-1.5 animate-glow-pulse rounded-full bg-accent" />
-          <span className="text-[11px] font-medium uppercase tracking-[0.3em] text-muted-foreground">
-            Freelance Creative Editing
-          </span>
-        </motion.div>
+        <path
+          ref={lineRef}
+          d="M 20,34 L 20,52 L 62,52 L 62,60"
+          fill="none"
+          className="stroke-grid"
+          strokeWidth="1.25"
+          vectorEffect="non-scaling-stroke"
+        />
+      </svg>
 
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: EASE, delay: 0.2 }}
-          style={{ textShadow: "0 4px 45px rgba(11,10,9,0.7)" }}
-          className="font-display text-[clamp(3.5rem,11vw,9.5rem)] font-semibold leading-[0.9] tracking-[-0.02em] text-foreground"
+      {/* VOXLO — upper-left */}
+      <div className="absolute left-[6%] top-[14%] sm:left-[8%]">
+        <Annotation variant="index" className="mb-3 block">
+          01 — Identity
+        </Annotation>
+        <h1
+          ref={voxloRef}
+          className="font-display text-[clamp(3rem,10vw,8rem)] font-semibold leading-[0.88] tracking-[-0.02em] text-foreground"
         >
           Voxlo
-          <br />
-          <span className="text-ember">Editing.</span>
-        </motion.h1>
+        </h1>
+      </div>
 
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.42 }}
-          className="mx-auto mt-8 max-w-xl text-xl text-muted-foreground md:text-2xl"
-          style={{ textShadow: "0 2px 20px rgba(11,10,9,0.7)" }}
+      {/* EDITING — lower-right, offset diagonally from VOXLO */}
+      <div className="absolute right-[6%] top-[46%] text-right sm:right-[9%]">
+        <h1
+          ref={editingRef}
+          className="text-ember font-display text-[clamp(3rem,10vw,8rem)] font-semibold leading-[0.88] tracking-[-0.02em]"
         >
-          {TAGLINE}
-        </motion.p>
+          Editing.
+        </h1>
+        <Annotation variant="coordinate" className="mt-3 block">
+          Scale 1:1
+        </Annotation>
+      </div>
 
-        {/* Audience filter */}
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.5 }}
-          className="mt-4 text-xs font-medium uppercase tracking-[0.25em] text-accent"
-        >
+      {/* Title block — tagline, audience line, and the two real CTAs, framed like a drawing's spec box */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 1.5, ease: [0.16, 1, 0.3, 1] }}
+        className="absolute bottom-[6%] left-[6%] w-[min(90vw,420px)] border border-border bg-background/50 p-5 backdrop-blur-sm sm:left-[8%]"
+      >
+        <Annotation className="mb-2 block">Voxlo-001 · Freelance Creative Editing</Annotation>
+        <p className="text-lg font-medium text-foreground">{TAGLINE}</p>
+        <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
           Built for creators from 1K to 10K subs
-        </motion.p>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.6 }}
-          className="mt-12 flex flex-col justify-center gap-4 sm:flex-row"
-        >
+        </p>
+        <div className="mt-5 flex flex-col gap-3 sm:flex-row">
           <Button asChild size="lg">
             <Link href="/work">
               View Work
@@ -112,19 +132,8 @@ export function Hero() {
           <Button asChild variant="outline" size="lg">
             <Link href="/contact">Get a Quote</Link>
           </Button>
-        </motion.div>
+        </div>
       </motion.div>
-
-      {/* Scroll cue */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-        className="absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2"
-      >
-        <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground/50">Scroll</span>
-        <ChevronDown className="h-4 w-4 animate-chevron text-muted-foreground/50" />
-      </motion.div>
-    </section>
+    </div>
   );
 }

@@ -1,4 +1,5 @@
 import { ArrowUpRight } from "lucide-react";
+import { Annotation } from "@/components/ui/Annotation";
 import { YouTubePlayer } from "./YouTubePlayer";
 
 interface ClientVideo {
@@ -50,9 +51,9 @@ export function ClientGallery() {
               {client.name}
               <ArrowUpRight className="h-4 w-4 text-muted-foreground/50" />
             </a>
-            <span className="rounded-full border border-border bg-white/5 px-2.5 py-1 text-[10px] uppercase tracking-widest text-muted-foreground">
+            <Annotation className="rounded-md border border-border bg-foreground/5 px-2.5 py-1">
               Client
-            </span>
+            </Annotation>
           </div>
         </div>
       ))}

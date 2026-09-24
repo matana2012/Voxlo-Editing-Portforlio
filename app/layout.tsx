@@ -2,10 +2,23 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { FilmGrain } from "@/components/ui/FilmGrain";
+import { Newsreader, Schibsted_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://voxloediting.com";
+// Editorial serif for display, a precise grotesk for reading, a plex mono for
+// everything that measures or annotates. Three registers, three jobs.
+const display = Newsreader({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  axes: ["opsz"],
+  variable: "--font-display",
+  display: "swap",
+  adjustFontFallback: false,
+});
+const sans = Schibsted_Grotesk({ subsets: ["latin"], variable: "--font-sans", display: "swap" });
+const mono = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-mono", display: "swap" });
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://voxlo.org";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -41,7 +54,7 @@ export const metadata: Metadata = {
     images: [`${SITE_URL}/api/og`],
   },
   icons: {
-    icon: "/favicon.svg",
+    icon: "/icon.png",
     apple: "/apple-touch-icon.png",
   },
 };
@@ -52,25 +65,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" className={`dark ${display.variable} ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
       <head>
-        {/* Prevent theme flash */}
+        {/* Reduced-motion visitors can opt into the spatial board; apply it before first paint. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                var t = localStorage.getItem('theme');
-                if (t === 'light') document.documentElement.classList.remove('dark');
-                else document.documentElement.classList.add('dark');
-              } catch(e) {}
-            `,
+            __html: `try{if(localStorage.getItem('voxlo-motion')==='on')document.documentElement.classList.add('force-motion')}catch(e){}`,
           }}
         />
       </head>
       <body>
-        <FilmGrain />
+        <a
+          href="#main-content"
+          className="fixed left-4 top-4 z-[100] -translate-y-16 bg-accent px-4 py-2 text-sm font-semibold text-background transition-transform focus:translate-y-0"
+        >
+          Skip to content
+        </a>
         <Navbar />
-        <main>{children}</main>
+        <main id="main-content">{children}</main>
         <Footer />
         <Analytics />
       </body>

@@ -48,7 +48,7 @@ export function CapabilityStrip() {
           <StaggerItem key={cap.label}>
             <Link
               href={cap.href}
-              className="group flex h-full min-h-[300px] flex-col justify-between rounded-2xl border border-border bg-muted/30 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:bg-muted/60"
+              className="group flex h-full min-h-[300px] flex-col justify-between rounded-lg border border-border bg-surface-1 p-8 transition-all duration-300 hover:-translate-y-1 hover:border-signal/40 hover:bg-surface-2"
             >
               <div>
                 <div className="mb-6 flex items-center justify-between">
@@ -56,7 +56,7 @@ export function CapabilityStrip() {
                     {cap.index}
                   </span>
                   {cap.signature && (
-                    <span className="rounded-full border border-accent/30 px-3 py-1 text-[10px] uppercase tracking-widest text-accent">
+                    <span className="rounded-md border border-accent/30 px-3 py-1 font-mono text-[10px] uppercase tracking-widest text-accent">
                       Signature
                     </span>
                   )}

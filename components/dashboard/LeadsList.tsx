@@ -72,7 +72,7 @@ export function LeadsList() {
             placeholder="Search by name, email, or project..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-white/5 border border-border text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-accent transition-colors"
+            className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-foreground/5 border border-border text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-accent transition-colors"
           />
         </div>
         {/* Status filters */}
@@ -83,13 +83,13 @@ export function LeadsList() {
               onClick={() => setStatusFilter(f.value)}
               className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all duration-200 ${
                 statusFilter === f.value
-                  ? "bg-accent text-[#0B0A09]"
-                  : "bg-white/5 text-muted-foreground hover:bg-white/10"
+                  ? "bg-accent text-background"
+                  : "bg-foreground/5 text-muted-foreground hover:bg-foreground/10"
               }`}
             >
               {f.label}
               {counts[f.value] > 0 && (
-                <span className={`rounded-full px-1.5 py-0.5 text-[10px] ${statusFilter === f.value ? "bg-white/20" : "bg-white/10"}`}>
+                <span className={`rounded-full px-1.5 py-0.5 text-[10px] ${statusFilter === f.value ? "bg-foreground/20" : "bg-foreground/10"}`}>
                   {counts[f.value]}
                 </span>
               )}
@@ -104,7 +104,7 @@ export function LeadsList() {
           Array.from({ length: 5 }).map((_, i) => <LeadRowSkeleton key={i} />)
         ) : filtered.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-32 gap-4 text-center px-6">
-            <div className="w-16 h-16 rounded-2xl bg-white/3 flex items-center justify-center border border-border">
+            <div className="w-16 h-16 rounded-lg bg-foreground/3 flex items-center justify-center border border-border">
               <Inbox className="h-7 w-7 text-muted-foreground/30" />
             </div>
             <p className="text-muted-foreground font-medium">No leads yet</p>
@@ -117,7 +117,7 @@ export function LeadsList() {
             <button
               key={lead.id}
               onClick={() => setSelectedLead(lead)}
-              className={`w-full text-left px-6 py-4 border-b border-border hover:bg-white/3 transition-colors flex items-center gap-4 ${selectedLead?.id === lead.id ? "bg-white/5" : ""}`}
+              className={`w-full text-left px-6 py-4 border-b border-border hover:bg-foreground/3 transition-colors flex items-center gap-4 ${selectedLead?.id === lead.id ? "bg-foreground/5" : ""}`}
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-3 mb-1">

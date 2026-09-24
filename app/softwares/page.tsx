@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { Annotation } from "@/components/ui/Annotation";
 import { SoftwareLogo } from "@/components/software/SoftwareLogo";
 
 export const metadata: Metadata = {
@@ -83,6 +84,9 @@ export default function SoftwaresPage() {
           {categories.map((cat, i) => (
             <AnimatedSection key={cat.title} delay={i * 0.05}>
               <section aria-labelledby={`cat-${i}`}>
+                <Annotation variant="index" className="mb-3 block text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </Annotation>
                 <h2
                   id={`cat-${i}`}
                   className="font-display text-2xl font-semibold tracking-tight text-foreground md:text-3xl"
@@ -95,9 +99,9 @@ export default function SoftwaresPage() {
                   {cat.items.map((item) => (
                     <div
                       key={item.slug}
-                      className="flex items-center gap-5 rounded-2xl border border-border bg-muted/30 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40"
+                      className="flex items-center gap-5 rounded-lg border border-border bg-surface-1 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-signal/40"
                     >
-                      <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center overflow-hidden rounded-2xl border border-border bg-background p-3.5">
+                      <div className="flex h-24 w-24 flex-shrink-0 items-center justify-center overflow-hidden rounded-lg border border-border bg-background p-3.5">
                         <SoftwareLogo src={`/logos/${item.slug}.png`} name={item.name} />
                       </div>
                       <div className="min-w-0">
@@ -105,9 +109,9 @@ export default function SoftwaresPage() {
                           {item.name}
                         </p>
                         {item.note && (
-                          <span className="mt-1 inline-block rounded-full border border-accent/25 bg-accent-soft px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-foreground/70">
+                          <Annotation className="mt-1 inline-block rounded-md border border-accent/25 bg-accent-soft px-2 py-0.5 text-foreground/70">
                             {item.note}
-                          </span>
+                          </Annotation>
                         )}
                       </div>
                     </div>

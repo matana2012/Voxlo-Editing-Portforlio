@@ -119,7 +119,7 @@ export default function SocialPage() {
                 href={s.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group flex flex-col h-full rounded-2xl border ${s.accentColor} bg-white/[0.02] hover:bg-white/[0.04] transition-colors duration-300 overflow-hidden`}
+                className={`group flex flex-col h-full rounded-lg border ${s.accentColor} bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-colors duration-300 overflow-hidden`}
               >
                 {/* Platform header bar */}
                 <div className="flex items-center justify-between p-5 border-b border-border">
@@ -141,7 +141,7 @@ export default function SocialPage() {
                 {/* Avatar + bio body */}
                 <div className="p-5 flex flex-col gap-4 flex-1">
                   {/* Avatar */}
-                  <div className="w-14 h-14 rounded-full bg-white/10 border border-border overflow-hidden flex-shrink-0 flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-full bg-foreground/10 border border-border overflow-hidden flex-shrink-0 flex items-center justify-center">
                     <SocialAvatar
                       src={s.avatarSrc}
                       alt={`${s.platform} profile photo`}

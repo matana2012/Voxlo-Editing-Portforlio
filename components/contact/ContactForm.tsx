@@ -201,10 +201,10 @@ export function ContactForm() {
                     <button
                       key={opt}
                       onClick={() => { setFormData((d) => ({ ...d, projectType: opt })); }}
-                      className={`px-5 py-2.5 rounded-full border text-sm font-medium transition-all duration-200 ${
+                      className={`px-5 py-2.5 rounded-md border text-sm font-medium transition-all duration-200 ${
                         formData.projectType === opt
                           ? "border-accent bg-accent/10 text-accent"
-                          : "border-border text-muted-foreground hover:border-white/30 hover:text-foreground"
+                          : "border-border text-muted-foreground hover:border-signal/50 hover:text-foreground"
                       }`}
                     >
                       {opt}
@@ -224,10 +224,10 @@ export function ContactForm() {
                     <button
                       key={opt}
                       onClick={() => setFormData((d) => ({ ...d, budget: opt }))}
-                      className={`px-5 py-2.5 rounded-full border text-sm font-medium transition-all duration-200 ${
+                      className={`px-5 py-2.5 rounded-md border text-sm font-medium transition-all duration-200 ${
                         formData.budget === opt
                           ? "border-accent bg-accent/10 text-accent"
-                          : "border-border text-muted-foreground hover:border-white/30 hover:text-foreground"
+                          : "border-border text-muted-foreground hover:border-signal/50 hover:text-foreground"
                       }`}
                     >
                       {opt}
@@ -247,10 +247,10 @@ export function ContactForm() {
                     <button
                       key={opt}
                       onClick={() => setFormData((d) => ({ ...d, timeline: opt }))}
-                      className={`px-5 py-2.5 rounded-full border text-sm font-medium transition-all duration-200 ${
+                      className={`px-5 py-2.5 rounded-md border text-sm font-medium transition-all duration-200 ${
                         formData.timeline === opt
                           ? "border-accent bg-accent/10 text-accent"
-                          : "border-border text-muted-foreground hover:border-white/30 hover:text-foreground"
+                          : "border-border text-muted-foreground hover:border-signal/50 hover:text-foreground"
                       }`}
                     >
                       {opt}
@@ -310,10 +310,10 @@ export function ContactForm() {
           <button
             onClick={advance}
             disabled={!canAdvance()}
-            className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+            className={`flex items-center gap-2 px-6 py-2.5 rounded-md text-sm font-medium transition-all duration-200 ${
               canAdvance()
-                ? "bg-accent text-[#0B0A09] hover:bg-accent-hover active:scale-[0.98]"
-                : "bg-white/5 text-muted-foreground/40 cursor-not-allowed"
+                ? "bg-accent text-background hover:bg-accent-hover active:scale-[0.98]"
+                : "bg-foreground/5 text-muted-foreground/40 cursor-not-allowed"
             }`}
           >
             OK
@@ -324,7 +324,7 @@ export function ContactForm() {
         {step === 5 && (
           <button
             onClick={advance}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium bg-accent text-[#0B0A09] hover:bg-accent-hover active:scale-[0.98] transition-all duration-200"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-md text-sm font-medium bg-accent text-background hover:bg-accent-hover active:scale-[0.98] transition-all duration-200"
           >
             Review
             <ArrowRight className="h-4 w-4" />
@@ -335,7 +335,7 @@ export function ContactForm() {
           <button
             onClick={handleSubmit}
             disabled={submitting || !canSubmit()}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-full text-sm font-medium bg-accent text-[#0B0A09] hover:bg-accent-hover active:scale-[0.98] transition-all duration-200 disabled:opacity-50"
+            className="flex items-center gap-2 px-6 py-2.5 rounded-md text-sm font-medium bg-accent text-background hover:bg-accent-hover active:scale-[0.98] transition-all duration-200 disabled:opacity-50"
           >
             {submitting ? (
               <>

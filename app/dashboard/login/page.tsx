@@ -43,7 +43,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-accent transition-colors text-sm"
+              className="w-full px-4 py-3 rounded-xl bg-foreground/5 border border-border text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-accent transition-colors text-sm"
               placeholder="you@example.com"
             />
           </div>
@@ -54,7 +54,7 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-xl bg-white/5 border border-border text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-accent transition-colors text-sm"
+              className="w-full px-4 py-3 rounded-xl bg-foreground/5 border border-border text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:border-accent transition-colors text-sm"
               placeholder="••••••••"
             />
           </div>
@@ -64,7 +64,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-accent py-3 text-sm font-semibold text-[#0B0A09] transition-colors hover:bg-accent-hover active:scale-[0.98] disabled:opacity-50"
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-accent py-3 text-sm font-semibold text-background transition-colors hover:bg-accent-hover active:scale-[0.98] disabled:opacity-50"
           >
             {loading && <Loader2 className="h-4 w-4 animate-spin" />}
             Sign in

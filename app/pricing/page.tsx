@@ -1,151 +1,106 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { pricingTiers as tiers, pricingDisclaimers as disclaimers } from "@/lib/data/pricing";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Pricing | Voxlo Editing",
+  title: "Pricing",
   description:
     "Editing rates for short-form, long-form, cinematic, and 3D video work. Every quote is scoped to your project.",
 };
 
-const tiers = [
-  {
-    name: "Short-form / Reels",
-    price: "$30",
-    priceNote: "starting at",
-    description:
-      "TikTok, Reels, Shorts — hook-first structure, beat sync, format optimization (9:16).",
-  },
-  {
-    name: "Mid-length video",
-    price: "$100",
-    priceNote: "starting at",
-    description:
-      "Up to ~15 min. Full narrative edit, B-roll integration, dynamic captions.",
-  },
-  {
-    name: "Long-form",
-    price: "$200",
-    priceNote: "starting at",
-    description:
-      "30+ min. Pacing, retention structure, chapter markers, full audio mix.",
-  },
-  {
-    name: "Cinematic / branded",
-    price: "$300",
-    priceNote: "starting at",
-    description:
-      "Brand-forward content, licensed music sync, motion logo, color identity.",
-  },
-  {
-    name: "Custom 3D / Motion",
-    price: "Custom",
-    priceNote: "quoted per project",
-    description:
-      "Blender integration, motion graphics, 3D compositing into live footage.",
-  },
-];
+const mono = "font-mono text-[10.5px] uppercase tracking-[0.16em]";
 
-const disclaimers = [
-  "Rush delivery (under 3 business days) is available for an additional fee.",
-  "50% deposit required before work begins.",
-  "Additional revision rounds beyond 2 are billed at an hourly rate.",
-];
-
+/** Rates as a drawing's schedule: one ruled sheet, prices set right like dimensions. */
 export default function PricingPage() {
   return (
-    <div className="pt-32 pb-24">
-      <div className="max-w-7xl mx-auto px-6">
-
-        {/* Header */}
-        <AnimatedSection className="mb-20">
-          <p className="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-accent">
-            Pricing
+    <div className="world-grid min-h-screen pb-24 pt-32">
+      <div className="mx-auto max-w-5xl px-6">
+        <AnimatedSection className="mb-16">
+          <p className={cn(mono, "flex items-center gap-3 text-gold")}>
+            Pricing <span aria-hidden className="h-px w-7 bg-gold/70" /> <span className="text-cream/70">Rate schedule</span>
           </p>
-          <h1 className="font-display text-5xl font-semibold leading-[0.9] tracking-tight text-foreground md:text-7xl">
-            <span className="text-ember">Rates.</span>
+          <h1 className="mt-8 font-display text-6xl font-normal leading-[0.92] tracking-[-0.025em] text-cream md:text-8xl">
+            Rates<em className="font-light italic text-gold">.</em>
           </h1>
-          <p className="mt-6 text-lg text-muted-foreground max-w-lg">
+          <p className="mt-6 max-w-lg text-lg leading-relaxed text-cream/75">
             Starting points by project type. Every quote is scoped to your footage and timeline.
           </p>
         </AnimatedSection>
 
-        {/* Anchor */}
-        <AnimatedSection delay={0.05} className="mb-14">
-          <div className="rounded-2xl border border-accent/25 bg-accent-soft p-8 md:p-10">
-            <p className="mb-3 text-xs font-medium uppercase tracking-[0.3em] text-accent">
-              The short version
-            </p>
-            <p className="font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
-              Starting at <span className="text-ember">$70</span>
-              <span className="text-2xl text-muted-foreground md:text-3xl">/video</span>
-            </p>
-            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-muted-foreground">
-              Flexes based on video length, complexity, and your situation. No rigid packages —
-              we scope it to what you actually need.
+        <AnimatedSection delay={0.05}>
+          <div className="flex flex-col gap-4 border-y border-gold/40 py-7 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className={cn(mono, "text-gold")}>The short version</p>
+              <p className="mt-3 max-w-md text-[15px] leading-relaxed text-muted-foreground">
+                Flexes with video length, complexity, and your situation. No rigid packages — we scope it to what you
+                actually need.
+              </p>
+            </div>
+            <p className="font-display text-5xl leading-none text-cream md:text-6xl">
+              <span className={cn(mono, "mr-3 align-middle text-muted-foreground")}>from</span>$70
+              <span className="text-2xl text-muted-foreground">/video</span>
             </p>
           </div>
         </AnimatedSection>
 
-        {/* Tier grid */}
         <AnimatedSection delay={0.1}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-            {tiers.map((tier) => (
-              <div
-                key={tier.name}
-                className="flex flex-col gap-5 rounded-2xl border border-border bg-muted/30 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40"
-              >
-                <p className="text-[10px] font-medium uppercase tracking-[0.25em] text-muted-foreground">
-                  {tier.name}
-                </p>
-
-                <div>
-                  <span
-                    className={cn(
-                      "font-display text-4xl font-semibold leading-none tabular-nums",
-                      tier.price === "Custom" ? "text-ember" : "text-foreground"
-                    )}
-                  >
-                    {tier.price}
-                  </span>
-                  <p className="text-xs text-muted-foreground/60 mt-1.5">{tier.priceNote}</p>
-                </div>
-
-                <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                  {tier.description}
-                </p>
-              </div>
-            ))}
-          </div>
+          <table className="mt-14 w-full border-collapse text-left">
+            <caption className="sr-only">Starting rates by project type</caption>
+            <thead>
+              <tr className="border-b border-line/40">
+                <th scope="col" className={cn(mono, "w-12 py-3 font-normal text-muted-foreground")}>No.</th>
+                <th scope="col" className={cn(mono, "py-3 font-normal text-muted-foreground")}>Project type</th>
+                <th scope="col" className={cn(mono, "py-3 text-right font-normal text-muted-foreground")}>Starting at</th>
+              </tr>
+            </thead>
+            <tbody>
+              {tiers.map((tier, i) => (
+                <tr key={tier.name} className="border-b border-line/20 align-top">
+                  <td className={cn(mono, "py-7 text-gold")}>{String(i + 1).padStart(2, "0")}</td>
+                  <td className="py-6 pr-6">
+                    <p className="font-display text-2xl text-cream md:text-3xl">{tier.name}</p>
+                    <p className="mt-2 max-w-[52ch] text-sm leading-relaxed text-muted-foreground">{tier.description}</p>
+                  </td>
+                  <td className="whitespace-nowrap py-6 text-right">
+                    <p className={cn("font-display text-3xl tabular-nums md:text-4xl", tier.price === "Custom" ? "italic text-gold" : "text-cream")}>
+                      {tier.price}
+                    </p>
+                    {tier.priceNote !== "starting at" && <p className={cn(mono, "mt-2 text-muted-foreground")}>{tier.priceNote}</p>}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </AnimatedSection>
 
-        {/* Disclaimers + CTA */}
-        <AnimatedSection delay={0.2} className="mt-14">
-          <div className="max-w-2xl">
-            <ul className="space-y-2.5 mb-5">
-              {disclaimers.map((d) => (
-                <li key={d} className="flex items-start gap-3">
-                  <span className="mt-[7px] w-1 h-1 rounded-full bg-muted-foreground/30 flex-shrink-0" />
-                  <span className="text-sm text-muted-foreground/60">{d}</span>
+        <AnimatedSection delay={0.15} className="mt-14 grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
+          <div>
+            <p className={cn(mono, "text-muted-foreground")}>Notes</p>
+            <ol className="mt-4 space-y-2.5">
+              {disclaimers.map((d, i) => (
+                <li key={d} className="grid grid-cols-[32px_1fr] text-sm text-cream/70">
+                  <span className={cn(mono, "pt-0.5 text-line")}>{String(i + 1).padStart(2, "0")}</span>
+                  {d}
                 </li>
               ))}
-            </ul>
-
-            <p className="mb-8 rounded-xl border border-border bg-muted/40 px-5 py-4 text-[15px] font-medium leading-relaxed text-foreground/80">
-              Pricing can change depending on your channel, what you need, and how you record.
-              Final pricing depends on footage volume, revision rounds, and turnaround needs.
-            </p>
-
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-[#0B0A09] transition-all duration-200 hover:scale-[1.03] hover:bg-accent-hover active:scale-[0.98]"
-            >
-              Get a custom quote →
-            </Link>
+              <li className="grid grid-cols-[32px_1fr] text-sm text-cream/70">
+                <span className={cn(mono, "pt-0.5 text-line")}>{String(disclaimers.length + 1).padStart(2, "0")}</span>
+                Pricing can change depending on your channel, what you need, and how you record. Final pricing depends on
+                footage volume, revision rounds, and turnaround needs.
+              </li>
+            </ol>
           </div>
+          <Link
+            href="/contact"
+            className="group inline-flex h-12 items-center gap-3 self-start bg-gold px-6 text-sm font-medium text-navy transition-colors hover:bg-cream md:self-end"
+          >
+            Get a custom quote
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </AnimatedSection>
-
       </div>
     </div>
   );

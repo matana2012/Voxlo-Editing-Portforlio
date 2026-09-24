@@ -63,7 +63,7 @@ export function TestimonialsSection() {
       <StaggerContainer className="grid grid-cols-1 gap-6 md:grid-cols-3">
         {testimonials.map((t, i) => (
           <StaggerItem key={i}>
-            <figure className="relative flex h-full flex-col gap-6 rounded-2xl border border-border bg-muted/30 p-8">
+            <figure className="relative flex h-full flex-col gap-6 rounded-lg border border-border bg-surface-1 p-8">
               <Quote className="h-7 w-7 text-accent/70" strokeWidth={1.5} />
               <blockquote
                 className={`flex-1 text-lg leading-relaxed ${
@@ -82,7 +82,7 @@ export function TestimonialsSection() {
                 </div>
               </figcaption>
               {t.placeholder && (
-                <span className="absolute right-5 top-5 rounded-full border border-border px-2.5 py-0.5 text-[10px] uppercase tracking-widest text-muted-foreground/60">
+                <span className="absolute right-5 top-5 rounded-md border border-border px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground/60">
                   Coming soon
                 </span>
               )}

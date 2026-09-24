@@ -9,7 +9,7 @@ export async function GET() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#0B0A09",
+          background: "#0B1550",
           display: "flex",
           flexDirection: "column",
           alignItems: "flex-start",
@@ -23,7 +23,7 @@ export async function GET() {
           style={{
             width: "72px",
             height: "5px",
-            background: "linear-gradient(100deg, #F5A623, #E8620A)",
+            background: "linear-gradient(100deg, #E8B94F, #D2A54F)",
             marginBottom: "32px",
             borderRadius: "3px",
           }}
@@ -32,7 +32,7 @@ export async function GET() {
           style={{
             fontSize: "84px",
             fontWeight: "700",
-            color: "#F4EEE4",
+            color: "#FAF8E1",
             letterSpacing: "-0.03em",
             lineHeight: "0.95",
             marginBottom: "24px",
@@ -43,7 +43,7 @@ export async function GET() {
         <div
           style={{
             fontSize: "28px",
-            color: "#A69684",
+            color: "#93A2BC",
             fontWeight: "500",
           }}
         >
@@ -55,13 +55,13 @@ export async function GET() {
             top: "80px",
             right: "80px",
             fontSize: "16px",
-            color: "#F5A623",
+            color: "#E8B94F",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             fontWeight: "500",
           }}
         >
-          voxloediting.com
+          voxlo.org
         </div>
       </div>
     ),

@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
       try {
         const resend = new Resend(process.env.RESEND_API_KEY);
         await resend.emails.send({
-          from: "Voxlo Leads <leads@voxloediting.com>",
+          from: "Voxlo Leads <leads@voxlo.org>",
           to: process.env.ADMIN_EMAIL,
           subject: `New lead from ${name} — ${projectType}`,
           html: `
@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
             <p><strong>Budget:</strong> ${budget ?? "Not specified"}</p>
             <p><strong>Timeline:</strong> ${timeline ?? "Not specified"}</p>
             ${message ? `<p><strong>Notes:</strong> ${message}</p>` : ""}
-            <p><a href="${process.env.NEXT_PUBLIC_SITE_URL ?? "https://voxloediting.com"}/dashboard">View in dashboard →</a></p>
+            <p><a href="${process.env.NEXT_PUBLIC_SITE_URL ?? "https://voxlo.org"}/dashboard">View in dashboard →</a></p>
           `,
         });
       } catch (emailErr) {

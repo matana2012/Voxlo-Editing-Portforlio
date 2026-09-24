@@ -6,6 +6,7 @@ import { YouTubePlayer } from "@/components/work/YouTubePlayer";
 import { ClientGallery } from "@/components/work/ClientGallery";
 import { ToolTag } from "@/components/work/ToolTag";
 import { featuredPieces } from "@/lib/data/portfolioPieces";
+import { RenShowcase } from "@/components/work/RenShowcase";
 
 const BEST_WORK_TOOLS = [
   "DaVinci Resolve",
@@ -39,7 +40,7 @@ function ToolTags({ tools }: { tools: string[] }) {
 
 export default function WorkPage() {
   return (
-    <div className="pt-32 pb-24">
+    <div className="world-grid min-h-screen pt-32 pb-24">
       <div className="max-w-7xl mx-auto px-6">
         {/* Header */}
         <AnimatedSection className="mb-16">
@@ -54,7 +55,10 @@ export default function WorkPage() {
           </p>
         </AnimatedSection>
 
-        {/* Channels — the main work, first thing you see */}
+        {/* Ren — the main channel, first thing you see */}
+        <RenShowcase />
+
+        {/* Channels */}
         <AnimatedSection delay={0.1}>
           <ChannelsGrid />
         </AnimatedSection>
